@@ -20,6 +20,7 @@ gp_optimize <- function(K, Y, optim.tol=0.1) {
   }
 
   #find the optimal s2 (by MLE)
+  #since we always scale y, it is between 0 and 1; is 0.05 good for lower bound?
   opt <- optimize(nlml, interval=c(0.05, 1), maximum=FALSE, K=K, Y=Y, tol=optim.tol)
   results <- list(s2opt = opt$minimum, nlml = opt$objective)
   return(results)
@@ -72,7 +73,7 @@ gp_train <- function(X, Y, b = NULL, s2 = 0.3, optimize = FALSE,
   X.init  <- X
 
   if (scale == TRUE & mixed_data == FALSE){
-    X.init.mean = apply(X.init, 2, mean)
+    X.init.mean <- apply(X.init, 2, mean)
     X.init.sd <- apply(X.init, 2, sd)
     if (sum(X.init.sd == 0) | sum(is.na(X.init.sd)) > 0) {
       stop("at least one column in X is a constant, please remove the constant(s)")
@@ -80,8 +81,9 @@ gp_train <- function(X, Y, b = NULL, s2 = 0.3, optimize = FALSE,
     X <- scale(X, center = TRUE, scale = X.init.sd)
   } else if (scale == TRUE & mixed_data == TRUE){
 
-    allx_cat <- sqrt(0.5)*X[, cat_num, drop= F]
-    X_cont <- X[, -cat_num, drop = F]
+    allx_cat <- sqrt(0.5)*X[, cat_num, drop= FALSE]
+    X_cont <- X[, -cat_num, drop = FALSE]
+    ### in this case, don't we have to keep both X.init.mean for categorical and continuous??
     X.init.mean = apply(X_cont, 2, mean)
     X.init.sd <- apply(X_cont, 2, sd)
     allx_cont <- scale(X_cont, center = TRUE, scale = X.init.sd)
@@ -96,27 +98,28 @@ gp_train <- function(X, Y, b = NULL, s2 = 0.3, optimize = FALSE,
     #print("Choice of b left null; choosing b to maximize var(K)")
     b = getb_maxvar(X)
   } else if (is.null(b) & mixed_data == TRUE){
+    # DK: check this part
     b = getb_maxvar(X)
+    #b = 2*ncol(X)
   }
 
   ## Calculate GP
-  K <- kernel(X, X, b=b)
+  K <- kernel_symmetric(X, b=b)
 
-  ## optimize s2
+  # optimize s2
   if (isTRUE(optimize)) { #optimize s2, given b
     opt <- gp_optimize(K=K, Y=Y)
     s2 <- opt$s2opt
   } #otherwise, user-specified s2 is given (or default s2)
 
-  ## original (Algorithm 2.1. in Rasmussen & Williams)
-
+  ## new (directly use chol2inv to get K^-1): 1.33x faster
   L <- chol_stable(K + diag(s2, nrow(K)))
   K_inv <- Matrix::chol2inv(L)
   m <- rep(0, nrow(X)) #zero mean prior
   a <- K_inv %*% (Y - m) #alpha with simplified computation using K^-1
   post_mean_scaled <- K %*% a
   post_cov_scaled <- K - K %*% K_inv %*% K
-  prior_mean_scaled = c(m)
+  prior_mean_scaled <- m
 
 
   #rescale Y to original
@@ -148,7 +151,6 @@ gp_train <- function(X, Y, b = NULL, s2 = 0.3, optimize = FALSE,
 
   return(results)
 }
-
 
 #' gp_predict
 #'

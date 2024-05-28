@@ -1,7 +1,7 @@
 #include <RcppArmadillo.h>
+
 // [[Rcpp::depends(RcppArmadillo)]]
 using namespace Rcpp;
-
 
 // [[Rcpp::export]]
 arma::mat kernel(
@@ -24,6 +24,27 @@ arma::mat kernel(
   return(K);
 }
 
+// [[Rcpp::export]]
+arma::mat kernel_symmetric(
+    arma::mat x, // input matrix
+    double b // length-scale
+) { 
+  size_t n = x.n_rows;
+  arma::mat K(n, n);
+  double sqdist;
+  
+  K.diag().ones(); // Initialize the diagonal elements to 1
+  
+  for (size_t i = 0; i < n; i++) {
+    for (size_t j = i + 1; j < n; j++) {
+      sqdist = arma::sum(arma::square(x.row(i) - x.row(j)));
+      K(i, j) = std::exp(-sqdist / b);
+      K(j, i) = K(i, j); // Symmetric property
+    }
+  }
+  
+  return K;
+}
 
 
 
@@ -104,10 +125,11 @@ double log_marginal_likelihood_cpp(
   bool success = false;
   arma::mat L;
   arma::mat I = arma::eye(n, n);
+  arma::mat K_s2 = K + s2 * I;
   
   while (!success && g < 1) {
     try {
-      L = arma::chol(K + s2 * I + g * I, "lower");
+      L = arma::chol(K_s2 + g * I, "lower"); // add "nudge" for numerical stability
       success = true;
     } catch(...) {
       g *= 10; // Increase g if chol fails
@@ -118,11 +140,14 @@ double log_marginal_likelihood_cpp(
     stop("Cholesky decomposition failed. The kernel matrix might not be positive semi-definite.");
   }
   
-  arma::vec alpha = arma::solve(arma::trimatl(L), y); // Forward substitution
-  alpha = arma::solve(arma::trimatu(L.t()), alpha); // Backward substitution
+  arma::vec alpha = arma::solve(arma::trimatl(L), y, arma::solve_opts::fast + arma::solve_opts::no_approx);
+  alpha = arma::solve(arma::trimatu(L.t()), alpha, arma::solve_opts::fast + arma::solve_opts::no_approx);
   
-  double logDetK = arma::as_scalar( arma::sum(arma::log(L.diag())) ); // Log determinant of K
-  double logLik = arma::as_scalar( -0.5 * dot(y, alpha) - logDetK - n / 2.0 * std::log(2 * M_PI) );
+  double logDetK = arma::sum(arma::log(L.diag())); // Log determinant of K
+  double logLik = -0.5 * arma::dot(y, alpha) - logDetK - (n / 2.0) * std::log(2 * M_PI);
   
   return(logLik);
 }
+
+
+

@@ -5,6 +5,10 @@ kernel <- function(x1, x2, b) {
     .Call('_gpss_kernel', PACKAGE = 'gpss', x1, x2, b)
 }
 
+kernel_symmetric <- function(x, b) {
+    .Call('_gpss_kernel_symmetric', PACKAGE = 'gpss', x, b)
+}
+
 kernel_linear_cpp <- function(x1, x2, sigma_f) {
     .Call('_gpss_kernel_linear_cpp', PACKAGE = 'gpss', x1, x2, sigma_f)
 }

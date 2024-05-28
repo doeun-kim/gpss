@@ -24,6 +24,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// kernel_symmetric
+arma::mat kernel_symmetric(arma::mat x, double b);
+RcppExport SEXP _gpss_kernel_symmetric(SEXP xSEXP, SEXP bSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type x(xSEXP);
+    Rcpp::traits::input_parameter< double >::type b(bSEXP);
+    rcpp_result_gen = Rcpp::wrap(kernel_symmetric(x, b));
+    return rcpp_result_gen;
+END_RCPP
+}
 // kernel_linear_cpp
 arma::mat kernel_linear_cpp(arma::mat x1, arma::mat x2, double sigma_f);
 RcppExport SEXP _gpss_kernel_linear_cpp(SEXP x1SEXP, SEXP x2SEXP, SEXP sigma_fSEXP) {
@@ -82,6 +94,7 @@ END_RCPP
 
 static const R_CallMethodDef CallEntries[] = {
     {"_gpss_kernel", (DL_FUNC) &_gpss_kernel, 3},
+    {"_gpss_kernel_symmetric", (DL_FUNC) &_gpss_kernel_symmetric, 2},
     {"_gpss_kernel_linear_cpp", (DL_FUNC) &_gpss_kernel_linear_cpp, 3},
     {"_gpss_kernel_se_cpp", (DL_FUNC) &_gpss_kernel_se_cpp, 4},
     {"_gpss_kernel_periodic_cpp", (DL_FUNC) &_gpss_kernel_periodic_cpp, 5},
