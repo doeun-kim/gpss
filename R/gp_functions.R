@@ -8,7 +8,6 @@
 #' @param Y Y vector (outcome variable)
 #'
 #' @importFrom stats sd optimize
-#' @importFrom Rcpp sourceCpp
 #' @return \item{s2opt}{optimized s2 value}
 #' \item{nlml}{the likelihood value at the optimal point}
 #' @export

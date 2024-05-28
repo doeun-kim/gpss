@@ -1,5 +1,10 @@
 ### Helper functions
 
+#' Rcpp functions
+#' @importFrom Rcpp sourceCpp
+#' @export
+sourceCpp("src/kernels.cpp")
+
 #' one_hot
 #'
 #' Convert categorical variables into multiple binary variables with 1 and 0.
