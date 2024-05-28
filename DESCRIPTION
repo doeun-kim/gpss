@@ -1,14 +1,19 @@
 Package: gpss
-Title: What the Package Does (One Line, Title Case)
+Title: Gaussian Processes in Social Science
 Version: 0.0.0.9000
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+   c(person("Soonhong", "Cho", , "tnsehdtm@gmail.com", role = c("aut")),
+    person("Doeun", "Kim", , "doeun2@ucla.edu", role = c("aut"),
+           comment = c(ORCID = "0000-0003-4789-6599")),
+    person("Chad", "Hazlett", , "chazlett@ucla.edu", role = c("aut", "cre")))
+Description: The Gaussian Process (GP) combines a highly flexible non-linear regression approach with rigorous handling of uncertainty. A key feature of this approach is that, while it can be used to produce a conditional expectation function representing the mode of a posterior conditional distribution, it does not ``choose a particular model fit'' and construct uncertainty estimates conditional on putting full faith in that model. This is valuable because the uncertainty estimates reflect the lesser knowledge we have at locations near, at, or beyond the edge of the observed data, where results from other approaches would become highly model-dependent. We first offer an accessible explanation of GPs, and provide an implementation more suitable to social science inference problems, which reduces the number of user-chosen hyperparameters from three to zero. We then illustrate the settings in which GPs can be most valuable: those where conventional approaches have poor properties due to model-dependency/extrapolation in data-sparse regions. Specifically, we demonstrate the usefulness of GPs in contexts where (i) treated and control models are needed by these groups have poor covariate overlap; (ii) regression discontinuity, which depends on model estimates taken at or just beyond the edge of their supporting data; and (iii) interrupted time-series designs, where models are fitted prior to an event by extrapolated after it. 
+License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 URL: https://github.com/doeun-kim/gpss
 BugReports: https://github.com/doeun-kim/gpss/issues
+Imports:
+    kbal,
+    Rcpp (>= 1.0.6)
+LinkingTo: Rcpp, RcppArmadillo
