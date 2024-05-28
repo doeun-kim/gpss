@@ -15,7 +15,9 @@ URL: https://github.com/doeun-kim/gpss,
     http://doeunkim.org/gpss/
 BugReports: https://github.com/doeun-kim/gpss/issues
 Imports:
-    kbal,
+    kbal (>= 0.1),
     Rcpp (>= 1.0.6),
     Matrix
 LinkingTo: Rcpp, RcppArmadillo
+Remotes:  
+    chadhazlett/KBAL
