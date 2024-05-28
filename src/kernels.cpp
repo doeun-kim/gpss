@@ -30,6 +30,9 @@ arma::mat kernel(
 
 
 
+
+
+
 // [[Rcpp::export]]
 arma::mat kernel_linear_cpp(
     arma::mat x1, // input matrix 1
@@ -97,13 +100,14 @@ double log_marginal_likelihood_cpp(
     double s2) {
   
   int n = K.n_rows;
-  double g = 1e-6;
+  double g = 1e-8;
   bool success = false;
   arma::mat L;
+  arma::mat I = arma::eye(n, n);
   
   while (!success && g < 1) {
     try {
-      L = arma::chol(K + s2 * arma::eye<arma::mat>(n, n) + g * arma::eye<arma::mat>(n, n), "lower");
+      L = arma::chol(K + s2 * I + g * I, "lower");
       success = true;
     } catch(...) {
       g *= 10; // Increase g if chol fails
@@ -117,8 +121,8 @@ double log_marginal_likelihood_cpp(
   arma::vec alpha = arma::solve(arma::trimatl(L), y); // Forward substitution
   alpha = arma::solve(arma::trimatu(L.t()), alpha); // Backward substitution
   
-  double logDetK = arma::sum(arma::log(L.diag())); // Log determinant of K
-  double logLik = -0.5 * dot(y, alpha) - logDetK - n / 2.0 * std::log(2 * M_PI);
+  double logDetK = arma::as_scalar( arma::sum(arma::log(L.diag())) ); // Log determinant of K
+  double logLik = arma::as_scalar( -0.5 * dot(y, alpha) - logDetK - n / 2.0 * std::log(2 * M_PI) );
   
   return(logLik);
 }

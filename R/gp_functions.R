@@ -15,18 +15,13 @@
 gp_optimize <- function(K, Y, optim.tol=0.1) {
 
   #define the objective function
-  nlml <- function(K, Y, s2){
+  nlml <- function(K, Y, s2){ #b is fixed
     return(-1*log_marginal_likelihood_cpp(K, Y, s2))
   }
 
-  #use `optimize` to find the optimal (MLE) s2
-  opt <- optimize(nlml,
-                  interval=c(0.05, 1),
-                  maximum=FALSE,
-                  K=K, Y=Y,
-                  tol=optim.tol)
-  results <- list(s2opt = opt$minimum,
-                  nlml = opt$objective)
+  #find the optimal s2 (by MLE)
+  opt <- optimize(nlml, interval=c(0.05, 1), maximum=FALSE, K=K, Y=Y, tol=optim.tol)
+  results <- list(s2opt = opt$minimum, nlml = opt$objective)
   return(results)
 }
 
@@ -51,12 +46,8 @@ gp_optimize <- function(K, Y, optim.tol=0.1) {
 #' @importFrom stats sd
 #'
 #' @export
-gp_train <- function(X, Y,
-                     b = NULL,
-                     s2 = 0.3, optimize = FALSE,
-                     scale = TRUE,
-                     mixed_data = FALSE, cat_columns = NULL,
-                     Xtest = NULL){
+gp_train <- function(X, Y, b = NULL, s2 = 0.3, optimize = FALSE,
+                     scale = TRUE, mixed_data = FALSE, cat_columns = NULL, Xtest = NULL){
   cat_num <- NULL
 
   ## pre-process outcome Y
@@ -91,7 +82,6 @@ gp_train <- function(X, Y,
 
     allx_cat <- sqrt(0.5)*X[, cat_num, drop= F]
     X_cont <- X[, -cat_num, drop = F]
-    ### in this case, don't we have to keep both X.init.mean for categorical and continuous??
     X.init.mean = apply(X_cont, 2, mean)
     X.init.sd <- apply(X_cont, 2, sd)
     allx_cont <- scale(X_cont, center = TRUE, scale = X.init.sd)
@@ -106,12 +96,10 @@ gp_train <- function(X, Y,
     #print("Choice of b left null; choosing b to maximize var(K)")
     b = getb_maxvar(X)
   } else if (is.null(b) & mixed_data == TRUE){
-    # DK: check this part
     b = getb_maxvar(X)
-    #b = 2*ncol(X)
   }
 
-  ## Calculate GP (Algorithm 2.1. in Rasmussen & Williams)
+  ## Calculate GP
   K <- kernel(X, X, b=b)
 
   ## optimize s2
@@ -120,14 +108,16 @@ gp_train <- function(X, Y,
     s2 <- opt$s2opt
   } #otherwise, user-specified s2 is given (or default s2)
 
-  L <- t(chol_stable(K + diag(s2, nrow(K))))
+  ## original (Algorithm 2.1. in Rasmussen & Williams)
+
+  L <- chol_stable(K + diag(s2, nrow(K)))
+  K_inv <- Matrix::chol2inv(L)
   m <- rep(0, nrow(X)) #zero mean prior
-  a <- solve(t(L), solve(L, Y-m)) #alpha
-  v <- solve(L, K)
-  V <- K - crossprod(v)
+  a <- K_inv %*% (Y - m) #alpha with simplified computation using K^-1
   post_mean_scaled <- K %*% a
-  post_cov_scaled <- K - crossprod(v)
+  post_cov_scaled <- K - K %*% K_inv %*% K
   prior_mean_scaled = c(m)
+
 
   #rescale Y to original
   post_mean_orig <- post_mean_scaled*Y.init.sd + Y.init.mean
@@ -208,11 +198,11 @@ gp_predict <- function(gp, Xtest){
   Kss <- kernel(Xtest, Xtest, b=gp$b) #K_{**}
   Ks <- kernel(Xtest, gp$X, b=gp$b)
 
-  Ys_mean_scaled <- Ys_mean <- c(Ks %*% gp$alpha)
+  Ys_mean_scaled <- c(Ks %*% gp$alpha)
   Ys_mean_orig = Ys_mean_scaled * gp$Y.init.sd + gp$Y.init.mean
 
   # we add s2*I to cov(f*) to compute cov(y*)
-  f_cov <- solve(gp$L, t(Ks))
+  f_cov <- solve(t(gp$L), t(Ks))
   f_cov <- Kss - crossprod(f_cov) #cov for target function
   Ys_cov_scaled <- f_cov + diag(gp$s2, nrow(f_cov)) #cov for new observation
   Ys_cov_orig <- gp$Y.init.sd^2 * Ys_cov_scaled #can be used for prediction interval
@@ -220,6 +210,7 @@ gp_predict <- function(gp, Xtest){
 
   results <- list(Xtest_scaled = Xtest,
                   Xtest = Xtest_init,
+                  #Ks = Ks, Kss = Kss,
                   Ys_mean_scaled = Ys_mean_scaled,
                   Ys_mean_orig = Ys_mean_orig,
                   Ys_cov_scaled = Ys_cov_scaled,
