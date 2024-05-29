@@ -112,7 +112,7 @@ gp_train <- function(X, Y, b = NULL, s2 = 0.3, optimize = FALSE,
   } #otherwise, user-specified s2 is given (or default s2)
 
   ## new (directly use chol2inv to get K^-1): 1.33x faster
-  L <- chol_stable(K + diag(s2, nrow(K)))
+  L <- chol(K + diag(s2, nrow(K)))
   K_inv <- Matrix::chol2inv(L)
   m <- rep(0, nrow(X)) #zero mean prior
   a <- K_inv %*% (Y - m) #alpha with simplified computation using K^-1
