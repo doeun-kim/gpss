@@ -13,7 +13,6 @@ The Gaussian Process (GP) combines a highly flexible non-linear regression appro
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/doeun-kim/gpss}
   \item \url{http://doeunkim.org/gpss/}
   \item Report bugs at \url{https://github.com/doeun-kim/gpss/issues}
 }
