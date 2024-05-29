@@ -123,23 +123,7 @@ double log_marginal_likelihood_cpp(
   int n = K.n_rows;
   double g = 1e-8;
   bool success = false;
-  arma::mat L;
-  arma::mat I = arma::eye(n, n);
-  arma::mat K_s2 = K + s2 * I;
-  
-  while (!success && g < 1) {
-    try {
-      L = arma::chol(K_s2 + g * I, "lower"); // add "nudge" for numerical stability
-      success = true;
-    } catch(...) {
-      g *= 10; // Increase g if chol fails
-    }
-  }
-  
-  if (!success) {
-    stop("Cholesky decomposition failed. The kernel matrix might not be positive semi-definite.");
-  }
-  
+  arma::mat L = arma::chol(K + s2 * arma::eye(n, n), "lower");  
   arma::vec alpha = arma::solve(arma::trimatl(L), y, arma::solve_opts::fast + arma::solve_opts::no_approx);
   alpha = arma::solve(arma::trimatu(L.t()), alpha, arma::solve_opts::fast + arma::solve_opts::no_approx);
   
@@ -148,6 +132,11 @@ double log_marginal_likelihood_cpp(
   
   return(logLik);
 }
+
+
+
+
+
 
 
 
