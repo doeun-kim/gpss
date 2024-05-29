@@ -19,5 +19,8 @@ Imports:
     Rcpp (>= 1.0.6),
     Matrix
 LinkingTo: Rcpp, RcppArmadillo
-Remotes:  
+Remotes: 
     chadhazlett/KBAL
+Depends: 
+    R (>= 2.10)
+LazyData: true
