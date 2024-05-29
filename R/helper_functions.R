@@ -1,14 +1,15 @@
 ### Helper functions
 
-#' one_hot
-#'
-#' Convert categorical variables into multiple binary variables with 1 and 0.
-#'
+# one_hot
+#
+# Convert categorical variables into multiple binary variables with 1 and 0.
+#
 #' @param data data frame containing only categorical variables
-#'
+#
 #' @return data frame containing expanded form of binary variables
-#'
+#
 #' @importFrom stats model.matrix contrasts
+#' @keywords internal
 #' @export
 one_hot <- function(data) {
   onehot_data <- data.frame(lapply(data.frame(data),as.factor))
@@ -22,16 +23,16 @@ one_hot <- function(data) {
 }
 
 
-#' mixed_data_processing
-#'
-#' Convert categorical variables in a data set into multiple binary variables with 1 and 0.
-#'
+# mixed_data_processing
+#
+# Convert categorical variables in a data set into multiple binary variables with 1 and 0.
+#
 #' @param X data set or matrix
 #' @param cat_columns a numerical or character vector that indicates categorical variables
 #' @param Xtest (optional) if there is testing data set separate from the training data, include the testing data
-#'
+#
 #' @return data frame containing expanded form of categorical variables
-#'
+#' @keywords internal
 #' @export
 mixed_data_processing <- function(X,
                                   cat_columns = NULL,
@@ -74,14 +75,14 @@ mixed_data_processing <- function(X,
 }
 
 
-#' chol_stable
-#'
-#' numerically stable Cholesky decomposition
-#'
+# chol_stable
+#
+# numerically stable Cholesky decomposition
+#
 #' @param X data set or matrix
-#'
+#
 #' @return cholesky-decomposed matrix
-#'
+#' @keywords internal
 #' @export
 chol_stable <- function(X){
 L <- try(chol(X), silent = TRUE)
@@ -96,15 +97,16 @@ if (inherits(L, "try-error")){
 return(L)
 }
 
-#' getb_maxvar
-#'
-#' numerically stable Cholesky decomposition
-#'
+# getb_maxvar
+#
+# numerically stable Cholesky decomposition
+#
 #' @param X data set or matrix
-#'
+#
 #' @return cholesky-decomposed matrix
-#'
+#
 #' @importFrom kbal b_maxvarK
+#' @keywords internal
 #' @export
 getb_maxvar <- function(X){
   X = as.matrix(X)

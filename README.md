@@ -6,7 +6,27 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of gpss is to …
+The Gaussian Process (GP) combines a highly flexible non-linear
+regression approach with rigorous handling of uncertainty. A key feature
+of this approach is that, while it can be used to produce a conditional
+expectation function representing the mode of a posterior conditional
+distribution, it does not \`\`choose a particular model fit’’ and
+construct uncertainty estimates conditional on putting full faith in
+that model. This is valuable because the uncertainty estimates reflect
+the lesser knowledge we have at locations near, at, or beyond the edge
+of the observed data, where results from other approaches would become
+highly model-dependent. We first offer an accessible explanation of GPs,
+and provide an implementation more suitable to social science inference
+problems, which reduces the number of user-chosen hyperparameters from
+three to zero. We then illustrate the settings in which GPs can be most
+valuable: those where conventional approaches have poor properties due
+to model-dependency/extrapolation in data-sparse regions. Specifically,
+we demonstrate the usefulness of GPs in contexts where (i) treated and
+control models are needed by these groups have poor covariate overlap;
+(ii) regression discontinuity, which depends on model estimates taken at
+or just beyond the edge of their supporting data; and (iii) interrupted
+time-series designs, where models are fitted prior to an event by
+extrapolated after it.
 
 ## Installation
 
@@ -59,11 +79,6 @@ Also see section 2.16
 
 ``` r
 library(gpss)
-#> 
-#> Attaching package: 'gpss'
-#> The following object is masked from 'package:stats':
-#> 
-#>     kernel
 data(lalonde)
 cat_vars=c("race_ethnicity", "married")
 all_vars= c("age","educ","re74","re75","married", "race_ethnicity")

@@ -2,3 +2,7 @@ url: http://doeunkim.org/gpss/
 template:
   bootstrap: 5
 
+navbar:
+  structure:
+    left:  [intro, reference]
+    right: [search, github]
