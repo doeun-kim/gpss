@@ -3,6 +3,8 @@
 // [[Rcpp::depends(RcppArmadillo)]]
 using namespace Rcpp;
 
+//' kernel
+//' @export
 // [[Rcpp::export]]
 arma::mat kernel(
     arma::mat x1, // input matrix 1
@@ -24,6 +26,8 @@ arma::mat kernel(
   return(K);
 }
 
+//' kernel_symmetric
+//' @export
 // [[Rcpp::export]]
 arma::mat kernel_symmetric(
     arma::mat x, // input matrix
@@ -46,14 +50,8 @@ arma::mat kernel_symmetric(
   return K;
 }
 
-
-
-
-
-
-
-
-
+//' kernel_linear_cpp
+//' @export
 // [[Rcpp::export]]
 arma::mat kernel_linear_cpp(
     arma::mat x1, // input matrix 1
@@ -65,6 +63,8 @@ arma::mat kernel_linear_cpp(
   return(K);
 }
 
+//' kernel_se_cpp
+//' @export
 // [[Rcpp::export]]
 arma::mat kernel_se_cpp(
     arma::mat x1, // input matrix 1
@@ -89,6 +89,8 @@ arma::mat kernel_se_cpp(
   return(K);
 }
 
+//' kernel_periodic_cpp
+//' @export
 // [[Rcpp::export]]
 arma::mat kernel_periodic_cpp(
     const arma::mat& x1,
@@ -113,7 +115,8 @@ arma::mat kernel_periodic_cpp(
 }
 
 
-
+//' log_marginal_likelihood_cpp
+//' @export
 // [[Rcpp::export]]
 double log_marginal_likelihood_cpp(
     const arma::mat& K,
