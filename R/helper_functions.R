@@ -9,14 +9,6 @@
 #' @return data frame containing expanded form of binary variables
 #'
 #' @importFrom stats model.matrix contrasts
-#' @examples
-#' #load and clean data a bit
-#' \donttest{
-#' data(lalonde)
-#' xvars=c(married","race_ethnicity")
-#'
-#' lalonde_cat2binary = one_hot(lalonde[,xvars])
-#' }
 #' @export
 one_hot <- function(data) {
   onehot_data <- data.frame(lapply(data.frame(data),as.factor))
