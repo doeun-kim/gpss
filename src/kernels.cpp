@@ -121,7 +121,6 @@ double log_marginal_likelihood_cpp(
     double s2) {
 
   int n = K.n_rows;
-  double g = 1e-8;
   arma::mat L = arma::chol(K + s2 * arma::eye(n, n), "lower");
   arma::vec alpha = arma::solve(arma::trimatl(L), y, arma::solve_opts::fast + arma::solve_opts::no_approx);
   alpha = arma::solve(arma::trimatu(L.t()), alpha, arma::solve_opts::fast + arma::solve_opts::no_approx);
