@@ -8,6 +8,7 @@
 #' @param Y Y vector (outcome variable)
 #'
 #' @importFrom stats sd optimize
+#' @importFrom Rcpp sourceCpp
 #' @return \item{s2opt}{optimized s2 value}
 #' \item{nlml}{the likelihood value at the optimal point}
 #' @export
@@ -44,6 +45,7 @@ gp_optimize <- function(K, Y, optim.tol=0.1) {
 #' \item{post_cov_scaled}{posterior covariance matrix in a scaled form}
 #' \item{post_cov_orig}{posterior covariance matrix in an original scale}
 #' @importFrom stats sd
+#' @importFrom Rcpp sourceCpp
 #'
 #' @export
 gp_train <- function(X, Y, b = NULL, s2 = 0.3, optimize = FALSE,
@@ -158,7 +160,7 @@ gp_train <- function(X, Y, b = NULL, s2 = 0.3, optimize = FALSE,
 #' @param gp a list-form object obtained from gp_train()
 #' @param Xtest a data frame or a matrix of testing data set
 #'
-#'
+#' @importFrom Rcpp sourceCpp
 #' @return \item{Xtest_scaled}{scaled testing data set}
 #' \item{Xtest}{original testing data set}
 #' @export
@@ -236,6 +238,7 @@ gp_predict <- function(gp, Xtest){
 #' @param scale a logical value indicating whether you want to scale the covariates (default = TRUE)
 #'
 #' @importFrom stats sd optimize complete.cases qnorm
+#' @importFrom Rcpp sourceCpp
 #' @return \item{tau}{an estimated treatment effect}
 #' \item{se}{the standard error of tau}
 #' @export
