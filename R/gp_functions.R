@@ -244,7 +244,10 @@ gp_predict <- function(gp, Xtest){
 #' @export
 gp_rdd <- function(X, Y, cut, alpha=0.05, b=NULL,
                    trim=FALSE, trim_k_value=0.1, scale=TRUE){
-  cutpoint <- c(cut, cut) #it doesn't take a scalar so use a vector (fix it later?)
+  cutpoint <- c(cut, cut)
+
+  b_left <- b
+  b_right <- b
 
   na.ok <- complete.cases(X) & complete.cases(Y)
   X <- as.matrix(X[na.ok])
@@ -275,10 +278,10 @@ gp_rdd <- function(X, Y, cut, alpha=0.05, b=NULL,
   }
 
   ## fit GP on left side of cutoff
-  gp_train_l <- gp_train(X = X_left, Y = Y_left, b=b, scale = scale, optimize = TRUE)
+  gp_train_l <- gp_train(X = X_left, Y = Y_left, b=b_left, scale = scale, optimize = TRUE)
   gp_pred_l <- gp_predict(gp_train_l, cutpoint)
   ## fit GP on right side of cutoff
-  gp_train_r <- gp_train(X = X_right, Y = Y_right, b=b, scale = scale, optimize = TRUE)
+  gp_train_r <- gp_train(X = X_right, Y = Y_right, b=b_right, scale = scale, optimize = TRUE)
   gp_pred_r <- gp_predict(gp_train_r, cutpoint)
 
   ## obtain estimate, se, and CI
