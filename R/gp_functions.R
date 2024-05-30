@@ -237,7 +237,6 @@ gp_predict <- function(gp, Xtest){
 #' @param trim_k_value a numerical value indicating the kernel value that you want to trim above (default = 0.1)
 #' @param scale a logical value indicating whether you want to scale the covariates (default = TRUE)
 #' @examples
-#'\dontrun{
 #' n <- 100
 #' tau <- 3
 #' cut <- 0
@@ -245,7 +244,6 @@ gp_predict <- function(gp, Xtest){
 #' y <- rnorm(n, 0, 1) + tau*ifelse(x>cut, 1, 0)
 #' gp_rdd.out <- gp_rdd(x, y, cut)
 #' gp_rdd_plot(gp_rdd.out)
-#'}
 #' @importFrom stats sd optimize complete.cases qnorm
 #' @importFrom Rcpp sourceCpp
 #' @return \item{tau}{an estimated treatment effect}
@@ -304,7 +302,12 @@ gp_rdd <- function(X, Y, cut, alpha=0.05, b=NULL,
                   pred_l=pred_l, pred_r=pred_r,
                   b_left=gp_train_l$b, b_right=gp_train_r$b,
                   s2_left=gp_train_l$s2, s2_right=gp_train_r$s2,
-                  n_left=length(X_left), n_right=length(X_right), trim=trim)
+                  n_left=length(X_left), n_right=length(X_right), trim=trim,
+                  X = X,
+                  Y = Y,
+                  gp_train_l = gp_train_l,
+                  gp_train_r = gp_train_r,
+                  cut = cut)
 
   if(trim==TRUE){
     results <- append(results,
