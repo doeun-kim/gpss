@@ -42,7 +42,7 @@ gp_train(
 \item{post_cov_orig}{posterior covariance matrix in an original scale}
 }
 \description{
-Feed training data set to gp_train() to obtain a gp model.
+to train GP model with training data set
 }
 \examples{
 data(lalonde)

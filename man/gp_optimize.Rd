@@ -16,5 +16,5 @@ gp_optimize(K, Y, optim.tol = 0.1)
 \item{nlml}{the likelihood value at the optimal point}
 }
 \description{
-gp_optimize() optimizes S2 using MLE. This function automatically runs when gp_train(..., optimize=TRUE).
+to optimizes S2 using MLE. This function automatically runs when gp_train(..., optimize=TRUE).
 }

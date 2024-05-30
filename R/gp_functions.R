@@ -2,7 +2,7 @@
 
 #' gp_optimize
 #'
-#' gp_optimize() optimizes S2 using MLE. This function automatically runs when gp_train(..., optimize=TRUE).
+#' to optimizes S2 using MLE. This function automatically runs when gp_train(..., optimize=TRUE).
 #'
 #' @param K kernel matrix (of covariates)
 #' @param Y Y vector (outcome variable)
@@ -28,7 +28,7 @@ gp_optimize <- function(K, Y, optim.tol=0.1) {
 
 #' gp_train
 #'
-#' Feed training data set to gp_train() to obtain a gp model.
+#' to train GP model with training data set
 #'
 #' @param X a set of covariate data frame or matrix
 #' @param Y Y vector (outcome variable)
@@ -171,7 +171,7 @@ gp_train <- function(X, Y, b = NULL, s2 = 0.3, optimize = FALSE,
 
 #' gp_predict
 #'
-#' gp_optimize() optimizes S2 using MLE. This function automatically runs when gp_train(..., optimize=TRUE).
+#' to predict outcome values at testing points by feeding the results obtained from gp_train()
 #'
 #' @param gp a list-form object obtained from gp_train()
 #' @param Xtest a data frame or a matrix of testing data set
@@ -257,7 +257,7 @@ gp_predict <- function(gp, Xtest){
 
 #' gp_rdd
 #'
-#' gp_rdd() performs RDD using GP functions
+#' to perform RD using GP functions
 #'
 #' @param X forcing variable
 #' @param Y Y vector (outcome variable)
@@ -356,13 +356,15 @@ gp_rdd <- function(X, Y, cut, alpha=0.05, b=NULL,
 #' @param l_col a character value indicating the color of the left side of the cutoff point (default = "blue")
 #' @param r_col a character value indicating the color of the right side of the cutoff point (default = "red")
 #' @examples
+#' library(ggplot2)
 #' n <- 100
 #' tau <- 3
 #' cut <- 0
 #' x <- rnorm(n, 0, 1)
 #' y <- rnorm(n, 0, 1) + tau*ifelse(x>cut, 1, 0)
 #' gp_rdd.out <- gp_rdd(x, y, cut)
-#' gp_rdd_plot(gp_rdd.out)
+#' gp_rdd_plot(gp_rdd.out) +
+#'  geom_vline(xintercept = cut, lty="dashed")
 #' @importFrom ggplot2 ggplot geom_point geom_line geom_ribbon theme_minimal aes
 #' @return \item{gg}{an RD ggplot}
 #' @export

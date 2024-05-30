@@ -37,7 +37,7 @@ gp_rdd(
 \item{se}{the standard error of tau}
 }
 \description{
-gp_rdd() performs RDD using GP functions
+to perform RD using GP functions
 }
 \examples{
 n <- 100
