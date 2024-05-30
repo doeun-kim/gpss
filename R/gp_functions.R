@@ -44,6 +44,22 @@ gp_optimize <- function(K, Y, optim.tol=0.1) {
 #' \item{post_mean_orig}{posterior distribution of Y in an original scale}
 #' \item{post_cov_scaled}{posterior covariance matrix in a scaled form}
 #' \item{post_cov_orig}{posterior covariance matrix in an original scale}
+#' @examples
+#' data(lalonde)
+#' cat_vars=c("race_ethnicity", "married")
+#' all_vars= c("age","educ","re74","re75","married", "race_ethnicity")
+#'
+#' X = lalonde[,all_vars]
+#' Y = lalonde$re78
+#' D = lalonde$nsw
+#'
+#' X_train = X[D==0,]
+#' Y_train = Y[D==0]
+#' X_test <- X[D == 1,]
+#' Y_test <- Y[D == 1]
+#'
+#' gp_train.out <- gp_train(X = X_train, Y = Y_train, optimize=TRUE, mixed_data = TRUE, cat_columns = cat_vars)
+#' gp_predict.out <- gp_predict(gp_train.out, X_test)
 #' @importFrom stats sd
 #' @importFrom Rcpp sourceCpp
 #'
@@ -159,7 +175,22 @@ gp_train <- function(X, Y, b = NULL, s2 = 0.3, optimize = FALSE,
 #'
 #' @param gp a list-form object obtained from gp_train()
 #' @param Xtest a data frame or a matrix of testing data set
+#' @examples
+#' data(lalonde)
+#' cat_vars=c("race_ethnicity", "married")
+#' all_vars= c("age","educ","re74","re75","married", "race_ethnicity")
 #'
+#' X = lalonde[,all_vars]
+#' Y = lalonde$re78
+#' D = lalonde$nsw
+#'
+#' X_train = X[D==0,]
+#' Y_train = Y[D==0]
+#' X_test <- X[D == 1,]
+#' Y_test <- Y[D == 1]
+#'
+#' gp_train.out <- gp_train(X = X_train, Y = Y_train, optimize=TRUE, mixed_data = TRUE, cat_columns = cat_vars)
+#' gp_predict.out <- gp_predict(gp_train.out, X_test)
 #' @importFrom Rcpp sourceCpp
 #' @return \item{Xtest_scaled}{scaled testing data set}
 #' \item{Xtest}{original testing data set}
@@ -324,6 +355,14 @@ gp_rdd <- function(X, Y, cut, alpha=0.05, b=NULL,
 #' @param gp_rdd_res a list-form results obtained from gp_rdd()
 #' @param l_col a character value indicating the color of the left side of the cutoff point (default = "blue")
 #' @param r_col a character value indicating the color of the right side of the cutoff point (default = "red")
+#' @examples
+#' n <- 100
+#' tau <- 3
+#' cut <- 0
+#' x <- rnorm(n, 0, 1)
+#' y <- rnorm(n, 0, 1) + tau*ifelse(x>cut, 1, 0)
+#' gp_rdd.out <- gp_rdd(x, y, cut)
+#' gp_rdd_plot(gp_rdd.out)
 #' @importFrom ggplot2 ggplot geom_point geom_line geom_ribbon theme_minimal aes
 #' @return \item{gg}{an RD ggplot}
 #' @export
