@@ -16,7 +16,8 @@ BugReports: https://github.com/doeun-kim/gpss/issues
 Imports:
     kbal (>= 0.1),
     Rcpp (>= 1.0.6),
-    Matrix
+    Matrix,
+    ggplot2
 LinkingTo: Rcpp, RcppArmadillo
 Remotes: 
     chadhazlett/KBAL

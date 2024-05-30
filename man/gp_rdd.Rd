@@ -39,3 +39,14 @@ gp_rdd(
 \description{
 gp_rdd() performs RDD using GP functions
 }
+\examples{
+\dontrun{
+n <- 100
+tau <- 3
+cut <- 0
+x <- rnorm(n, 0, 1)
+y <- rnorm(n, 0, 1) + tau*ifelse(x>cut, 1, 0)
+gp_rdd.out <- gp_rdd(x, y, cut)
+gp_rdd_plot(gp_rdd.out)
+}
+}
