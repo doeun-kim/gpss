@@ -44,6 +44,25 @@ gp_optimize <- function(K, Y, optim.tol=0.1) {
 #' \item{post_mean_orig}{posterior distribution of Y in an original scale}
 #' \item{post_cov_scaled}{posterior covariance matrix in a scaled form}
 #' \item{post_cov_orig}{posterior covariance matrix in an original scale}
+#' \item{K}{a kernel matrix of X}
+#' \item{prior_mean_scaled}{prior distribution of mean in a scaled form}
+#' \item{X.orig}{the original matrix or data set of X}
+#' \item{X.init}{the original matrix or data set of X with categorical variables in an expanded form}
+#' \item{X.init.mean}{the initial mean values of X}
+#' \item{X.init.sd}{the initial standard deviation values of X}
+#' \item{Y.init.mean}{the initial mean value of Y}
+#' \item{Y.init.sd}{the initial standard deviation value of Y}
+#' \item{K}{the kernel matrix of X}
+#' \item{Y}{scaled Y}
+#' \item{X}{scaled X}
+#' \item{b}{bandwidth}
+#' \item{s2}{sigma squared}
+#' \item{alpha}{alpha value in Rasmussen and Williams (2006) p.19)}
+#' \item{L}{L value in Rasmussen and Williams (2006) p.19)}
+#' \item{mixed_data}{a logical value indicating whether X contains a categorical/binary variable}
+#' \item{cat_columns}{a character or a numerical vector indicating the location of categorical/binary variables in X}
+#' \item{cat_num}{a numerical vector indicating the location of categorical/binary variables in an expanded version of X}
+#' \item{Xcolnames}{column names of X}
 #' @examples
 #' data(lalonde)
 #' cat_vars=c("race_ethnicity", "married")
@@ -76,7 +95,7 @@ gp_train <- function(X, Y, b = NULL, s2 = 0.3, optimize = FALSE,
 
   ## pre-process covariates X
   X <- as.matrix(X)
-  X_orig  <- X
+  X.orig  <- X
   n <- nrow(X)
   d <- ncol(X)
   if(mixed_data == TRUE){
@@ -147,16 +166,17 @@ gp_train <- function(X, Y, b = NULL, s2 = 0.3, optimize = FALSE,
                   post_mean_orig = post_mean_orig,
                   post_cov_scaled = post_cov_scaled,
                   post_cov_orig = post_cov_orig,
-                  K = K,
+
                   prior_mean_scaled = prior_mean_scaled,
+                  X.orig = X.orig,
                   X.init = X.init,
                   X.init.mean = X.init.mean,
                   X.init.sd = X.init.sd,
                   Y.init.mean = Y.init.mean,
                   Y.init.sd = Y.init.sd,
+                  K = K,
                   Y = Y,
                   X = X,
-                  X_orig = X_orig,
                   b = b,
                   s2 = s2,
                   alpha=c(a),
@@ -192,8 +212,15 @@ gp_train <- function(X, Y, b = NULL, s2 = 0.3, optimize = FALSE,
 #' gp_train.out <- gp_train(X = X_train, Y = Y_train, optimize=TRUE, mixed_data = TRUE, cat_columns = cat_vars)
 #' gp_predict.out <- gp_predict(gp_train.out, X_test)
 #' @importFrom Rcpp sourceCpp
-#' @return \item{Xtest_scaled}{scaled testing data set}
-#' \item{Xtest}{original testing data set}
+#' @return \item{Xtest_scaled}{testing data in a scaled form}
+#' \item{Xtest}{the original testing data set}
+#' \item{Ys_mean_scaled}{the predicted values of Y in a scaled form}
+#' \item{Ys_mean_orig}{the predicted values of Y in the original scale}
+#' \item{Ys_cov_scaled}{covariance of predicted Y in a scaled form}
+#' \item{Ys_cov_orig}{covariance of predicted Y in the original scale}
+#' \item{f_cov_orig}{covariance of target function in the original scale}
+#' \item{b}{the bandwidth value obtained from gp_train()}
+#' \item{s2}{the s2 value obtained from gp_train()}
 #' @export
 gp_predict <- function(gp, Xtest){
   mixed_data <- gp$mixed_data
@@ -203,7 +230,7 @@ gp_predict <- function(gp, Xtest){
     Xtest <- sweep(Xtest_init, MARGIN=2, gp$X.init.mean, FUN = "-")
     Xtest <- sweep(Xtest, MARGIN=2, gp$X.init.sd, FUN = "/")
   } else {
-    Xtest_mix <- mixed_data_processing(gp$X_orig,
+    Xtest_mix <- mixed_data_processing(gp$X.orig,
                                        cat_columns = gp$cat_columns,
                                        Xtest=Xtest_init)
     Xtest <- Xtest_mix$X
@@ -248,8 +275,8 @@ gp_predict <- function(gp, Xtest){
                   Ys_mean_scaled = Ys_mean_scaled,
                   Ys_mean_orig = Ys_mean_orig,
                   Ys_cov_scaled = Ys_cov_scaled,
-                  f_cov_orig = f_cov_orig,
                   Ys_cov_orig = Ys_cov_orig,
+                  f_cov_orig = f_cov_orig,
                   b = gp$b,
                   s2 = gp$s2)
   return(results)

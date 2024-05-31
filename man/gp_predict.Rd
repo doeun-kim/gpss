@@ -12,8 +12,15 @@ gp_predict(gp, Xtest)
 \item{Xtest}{a data frame or a matrix of testing data set}
 }
 \value{
-\item{Xtest_scaled}{scaled testing data set}
-\item{Xtest}{original testing data set}
+\item{Xtest_scaled}{testing data in a scaled form}
+\item{Xtest}{the original testing data set}
+\item{Ys_mean_scaled}{the predicted values of Y in a scaled form}
+\item{Ys_mean_orig}{the predicted values of Y in the original scale}
+\item{Ys_cov_scaled}{covariance of predicted Y in a scaled form}
+\item{Ys_cov_orig}{covariance of predicted Y in the original scale}
+\item{f_cov_orig}{covariance of target function in the original scale}
+\item{b}{the bandwidth value obtained from gp_train()}
+\item{s2}{the s2 value obtained from gp_train()}
 }
 \description{
 to predict outcome values at testing points by feeding the results obtained from gp_train()

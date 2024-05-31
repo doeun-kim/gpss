@@ -40,6 +40,25 @@ gp_train(
 \item{post_mean_orig}{posterior distribution of Y in an original scale}
 \item{post_cov_scaled}{posterior covariance matrix in a scaled form}
 \item{post_cov_orig}{posterior covariance matrix in an original scale}
+\item{K}{a kernel matrix of X}
+\item{prior_mean_scaled}{prior distribution of mean in a scaled form}
+\item{X.orig}{the original matrix or data set of X}
+\item{X.init}{the original matrix or data set of X with categorical variables in an expanded form}
+\item{X.init.mean}{the initial mean values of X}
+\item{X.init.sd}{the initial standard deviation values of X}
+\item{Y.init.mean}{the initial mean value of Y}
+\item{Y.init.sd}{the initial standard deviation value of Y}
+\item{K}{the kernel matrix of X}
+\item{Y}{scaled Y}
+\item{X}{scaled X}
+\item{b}{bandwidth}
+\item{s2}{sigma squared}
+\item{alpha}{alpha value in Rasmussen and Williams (2006) p.19)}
+\item{L}{L value in Rasmussen and Williams (2006) p.19)}
+\item{mixed_data}{a logical value indicating whether X contains a categorical/binary variable}
+\item{cat_columns}{a character or a numerical vector indicating the location of categorical/binary variables in X}
+\item{cat_num}{a numerical vector indicating the location of categorical/binary variables in an expanded version of X}
+\item{Xcolnames}{column names of X}
 }
 \description{
 to train GP model with training data set
