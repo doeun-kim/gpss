@@ -33,4 +33,10 @@
   <url>
     <loc>/reference/index.html</loc>
   </url>
+  <url>
+    <loc>/reference/mixed_data_processing.html</loc>
+  </url>
+  <url>
+    <loc>/reference/one_hot.html</loc>
+  </url>
 </urlset>
