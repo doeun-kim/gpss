@@ -2,6 +2,8 @@ url: ~
 template:
   bootstrap: 5
 
- components:
-   reference:
-    text: Functions
+navbar:
+  left:
+    - text: "Functions"
+      href: reference/tutorial.html
+  right: [search, github]
