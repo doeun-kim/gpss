@@ -1,9 +1,9 @@
 ### Helper functions
 
-# one_hot
-#
-# Convert categorical variables into multiple binary variables with 1 and 0.
-#
+#' one_hot
+#'
+#' to convert categorical variables into multiple binary variables with 1 and 0.
+#'
 #' @param data data frame containing only categorical variables
 #
 #' @return data frame containing expanded form of binary variables
@@ -23,10 +23,10 @@ one_hot <- function(data) {
 }
 
 
-# mixed_data_processing
-#
-# Convert categorical variables in a data set into multiple binary variables with 1 and 0.
-#
+#' mixed_data_processing
+#'
+#' to convert categorical variables in a data set into multiple binary variables with 1 and 0.
+#'
 #' @param X data set or matrix
 #' @param cat_columns a numerical or character vector that indicates categorical variables
 #' @param Xtest (optional) if there is testing data set separate from the training data, include the testing data
@@ -98,8 +98,6 @@ return(L)
 }
 
 # getb_maxvar
-#
-# numerically stable Cholesky decomposition
 #
 #' @param X data set or matrix
 #

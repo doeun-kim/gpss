@@ -53,8 +53,8 @@ gp_train(
 \item{X}{scaled X}
 \item{b}{bandwidth}
 \item{s2}{sigma squared}
-\item{alpha}{alpha value in Rasmussen and Williams (2006) p.19)}
-\item{L}{L value in Rasmussen and Williams (2006) p.19)}
+\item{alpha}{alpha value in Rasmussen and Williams (2006) p.19}
+\item{L}{L value in Rasmussen and Williams (2006) p.19}
 \item{mixed_data}{a logical value indicating whether X contains a categorical/binary variable}
 \item{cat_columns}{a character or a numerical vector indicating the location of categorical/binary variables in X}
 \item{cat_num}{a numerical vector indicating the location of categorical/binary variables in an expanded version of X}

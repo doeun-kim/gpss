@@ -3,7 +3,23 @@ template:
   bootstrap: 5
 
 navbar:
-  left:
-    - text: "Functions"
-      href: reference/tutorial.html
-  right: [search, github]
+  structure:
+    left: [reference]
+    right: [search, github]
+  components:
+    reference:
+      text: Functions
+      href: reference/index.html
+
+reference:
+  - title: Main Functions
+  - contents:
+    - gp_train
+    - gp_predict
+    - gp_rdd
+    - gp_rdd_plot
+  - title: Internal Functions
+  - contents:
+    - gp_optimize
+    - mixed_data_processing
+    - one_hot
