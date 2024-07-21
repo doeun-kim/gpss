@@ -128,6 +128,17 @@
 <span></span>
 <span><span class="va">gp_predict.out</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/gp_predict.html">gp_predict</a></span><span class="op">(</span><span class="va">gp_train.out</span>, <span class="va">X_test</span><span class="op">)</span></span></code></pre></div>
 </div>
+<div class="section level2">
+<h2 id="optional-accelerate-r-faster-matrix-operations-in-r">Optional: Accelerate R (faster matrix operations in R)<a class="anchor" aria-label="anchor" href="#optional-accelerate-r-faster-matrix-operations-in-r"></a>
+</h2>
+<p>Mac users can see a significant speed up (5-10x) by using Apple’s native Accelerate BLAS library (vecLib). Upgrade to the latest version of R and RStudio, then follow the steps outlined <a href="https://cran.r-project.org/bin/macosx/RMacOSX-FAQ.html#Which-BLAS-is-used-and-how-can-it-be-changed_003f" class="external-link">here</a>:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="bu">cd</span> /Library/Frameworks/R.framework/Resources/lib</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="co"># for vecLib use</span></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="fu">ln</span> <span class="at">-sf</span> libRblas.vecLib.dylib libRblas.dylib</span></code></pre></div>
+<p>For Window Users and to learn more details regarding installation and reversion, please see <a href="https://higgicd.github.io/posts/accelerating_r/" class="external-link">this blog post</a>.</p>
+<p>Here is another Blog Post that explains about the benefits of using Accelerate BLAS libraries: <a href="https://mpopov.com/blog/2019/06/04/faster-matrix-math-in-r-on-macos/" class="external-link">MacOS</a> and <a href="https://mpopov.com/blog/2021/10/10/even-faster-matrix-math-in-r-on-macos-with-m1/" class="external-link">MacOS with M1</a>.</p>
+</div>
 </div>
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
