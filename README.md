@@ -36,6 +36,33 @@ You can install the latest version by running:
 devtools::install_github('doeun-kim/gpss')
 ```
 
+## Example
+
+``` r
+library(gpss)
+data(lalonde)
+cat_vars <- c("race_ethnicity", "married")
+all_vars <-  c("age","educ","re74","re75","married", "race_ethnicity")
+
+X <- lalonde[,all_vars]
+
+
+Y <- lalonde$re78
+D <- lalonde$nsw
+
+X_train <- X[D==0,]
+Y_train <- Y[D==0]
+
+X_test <- X[D == 1,]
+Y_test <- Y[D == 1]
+
+gp_train.out <- gp_train(X = X_train, Y = Y_train, optimize=TRUE,
+                         mixed_data = TRUE, 
+                         cat_columns = cat_vars)
+
+gp_predict.out <- gp_predict(gp_train.out, X_test)
+```
+
 ### Troubleshooting installation
 
 This version uses `Rcpp` extensively for speed reasons. These means you
@@ -75,29 +102,26 @@ sudo tar fvxz gfortran-4.8.2-darwin13.tar.bz2 -C /
 Also see section 2.16
 [here](http://dirk.eddelbuettel.com/code/rcpp/Rcpp-FAQ.pdf)
 
-## Example
+## Accelerate R (speed optimization for MacOS)
 
-``` r
-library(gpss)
-data(lalonde)
-cat_vars <- c("race_ethnicity", "married")
-all_vars <-  c("age","educ","re74","re75","married", "race_ethnicity")
+Mac users can see a significant speed up (5-10x) by using Apple’s native
+Accelerate BLAS library (vecLib). Upgrade to the latest version of R and
+RStudio, then follow the steps outlined
+[here](https://cran.r-project.org/bin/macosx/RMacOSX-FAQ.html#Which-BLAS-is-used-and-how-can-it-be-changed_003f):
 
-X <- lalonde[,all_vars]
+``` bash
+cd /Library/Frameworks/R.framework/Resources/lib
 
-
-Y <- lalonde$re78
-D <- lalonde$nsw
-
-X_train <- X[D==0,]
-Y_train <- Y[D==0]
-
-X_test <- X[D == 1,]
-Y_test <- Y[D == 1]
-
-gp_train.out <- gp_train(X = X_train, Y = Y_train, optimize=TRUE,
-                         mixed_data = TRUE, 
-                         cat_columns = cat_vars)
-
-gp_predict.out <- gp_predict(gp_train.out, X_test)
+# for vecLib use
+ln -sf libRblas.vecLib.dylib libRblas.dylib
 ```
+
+For Window Users and to learn more details regarding installation and
+reversion, please see
+[here](https://higgicd.github.io/posts/accelerating_r/).
+
+Here is another Blog Post that explains about the benefits of using
+Accelerate BLAS libraries:
+[MacOS](https://mpopov.com/blog/2019/06/04/faster-matrix-math-in-r-on-macos/)
+and [MacOS with
+M1](https://mpopov.com/blog/2021/10/10/even-faster-matrix-math-in-r-on-macos-with-m1/).

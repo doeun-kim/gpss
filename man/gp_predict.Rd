@@ -27,15 +27,15 @@ to predict outcome values at testing points by feeding the results obtained from
 }
 \examples{
 data(lalonde)
-cat_vars=c("race_ethnicity", "married")
-all_vars= c("age","educ","re74","re75","married", "race_ethnicity")
+cat_vars <- c("race_ethnicity", "married")
+all_vars <- c("age","educ","re74","re75","married", "race_ethnicity")
 
-X = lalonde[,all_vars]
-Y = lalonde$re78
-D = lalonde$nsw
+X <- lalonde[,all_vars]
+Y <- lalonde$re78
+D <- lalonde$nsw
 
-X_train = X[D==0,]
-Y_train = Y[D==0]
+X_train <- X[D==0,]
+Y_train <- Y[D==0]
 X_test <- X[D == 1,]
 Y_test <- Y[D == 1]
 

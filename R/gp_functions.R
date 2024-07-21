@@ -65,15 +65,15 @@ gp_optimize <- function(K, Y, optim.tol=0.1) {
 #' \item{Xcolnames}{column names of X}
 #' @examples
 #' data(lalonde)
-#' cat_vars=c("race_ethnicity", "married")
-#' all_vars= c("age","educ","re74","re75","married", "race_ethnicity")
+#' cat_vars <- c("race_ethnicity", "married")
+#' all_vars <- c("age","educ","re74","re75","married", "race_ethnicity")
 #'
-#' X = lalonde[,all_vars]
-#' Y = lalonde$re78
-#' D = lalonde$nsw
+#' X <- lalonde[,all_vars]
+#' Y <- lalonde$re78
+#' D <- lalonde$nsw
 #'
-#' X_train = X[D==0,]
-#' Y_train = Y[D==0]
+#' X_train <- X[D==0,]
+#' Y_train <- Y[D==0]
 #' X_test <- X[D == 1,]
 #' Y_test <- Y[D == 1]
 #'
@@ -197,15 +197,15 @@ gp_train <- function(X, Y, b = NULL, s2 = 0.3, optimize = FALSE,
 #' @param Xtest a data frame or a matrix of testing data set
 #' @examples
 #' data(lalonde)
-#' cat_vars=c("race_ethnicity", "married")
-#' all_vars= c("age","educ","re74","re75","married", "race_ethnicity")
+#' cat_vars <- c("race_ethnicity", "married")
+#' all_vars <- c("age","educ","re74","re75","married", "race_ethnicity")
 #'
-#' X = lalonde[,all_vars]
-#' Y = lalonde$re78
-#' D = lalonde$nsw
+#' X <- lalonde[,all_vars]
+#' Y <- lalonde$re78
+#' D <- lalonde$nsw
 #'
-#' X_train = X[D==0,]
-#' Y_train = Y[D==0]
+#' X_train <- X[D==0,]
+#' Y_train <- Y[D==0]
 #' X_test <- X[D == 1,]
 #' Y_test <- Y[D == 1]
 #'
