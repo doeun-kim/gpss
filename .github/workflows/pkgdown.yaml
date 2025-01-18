@@ -36,7 +36,7 @@ jobs:
       - name: Install kbal from GitHub
         run: |
           Rscript -e 'install.packages("remotes", repos = "https://cloud.r-project.org")'
-          Rscript -e 'remotes::install_github("username/kbal")' # Replace with the correct repository path
+          Rscript -e 'remotes::install_github("chadhazlett/KBAL")' # Replace with the correct repository path
 
 
       - uses: r-lib/actions/setup-r-dependencies@v2
