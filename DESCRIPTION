@@ -14,7 +14,7 @@ RoxygenNote: 7.2.3
 URL: http://doeunkim.org/gpss/
 BugReports: https://github.com/doeun-kim/gpss/issues
 Imports:
-    kbal (>= 0.1),
+    kbal,
     Rcpp (>= 1.0.6),
     Matrix,
     ggplot2
