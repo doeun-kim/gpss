@@ -48,12 +48,15 @@ predict.gpss <- function(object, newdata = NULL, type = "response", format = "de
         msg <- "Please install the `posterior` package."
         stop(msg, call. = FALSE)
       }
-      # se <- sqrt(diag(gp_pred_l$f_cov_orig)[1] + diag(gp_pred_r$f_cov_orig)[1])
-      mu <- out$Ys_mean_orig
-      se <- sqrt(diag(out$f_cov_orig))
-      rv <- lapply(seq_along(mu), function(i) rnorm(1e4, mu[i], se[i]))
-      rv <- do.call(cbind, rv)
-      rv <- posterior::rvar(rv)
+      if (!requireNamespace("mvnfast")) {
+        msg <- "Please install the `mvnfast` package."
+        stop(msg, call. = FALSE)
+      }
+
+      # slow
+      rv <- MASS::mvrnorm(1e3, out$Ys_mean_orig, out$f_cov_orig)
+      draws <- posterior::rvar(rv)
+
       out <- newdata
       out$rvar <- posterior::rvar(rv)
     } else {
