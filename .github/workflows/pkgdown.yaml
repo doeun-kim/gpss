@@ -32,11 +32,12 @@ jobs:
         with:
           use-public-rspm: true
 
-      - name: Install dependencies explicitly
+      # Add step to install kbal from GitHub
+      - name: Install kbal from GitHub
         run: |
           Rscript -e 'install.packages("remotes", repos = "https://cloud.r-project.org")'
-          Rscript -e 'remotes::install_github("chadhazlett/KBAL")'
-          Rscript -e 'install.packages(c("sessioninfo", "pkgdown"), repos = "https://cloud.r-project.org")'
+          Rscript -e 'remotes::install_github("username/kbal")' # Replace with the correct repository path
+
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
