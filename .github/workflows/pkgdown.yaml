@@ -37,11 +37,11 @@ jobs:
           extra-packages: any::pkgdown, local::.
           needs: website
 
-      # Add a step to install kbal if it is hosted on GitHub
-      - name: Install kbal from GitHub
+      - name: Install dependencies explicitly
         run: |
-          Rscript -e 'install.packages("remotes", repos = "https://cloud.r-project.org")'
-          Rscript -e 'remotes::install_github("chadhazlett/KBAL")'
+    Rscript -e 'install.packages("remotes", repos = "https://cloud.r-project.org")'
+    Rscript -e 'remotes::install_github("chadhazlett/KBAL")'
+    Rscript -e 'install.packages(c("sessioninfo", "pkgdown"), repos = "https://cloud.r-project.org")'
 
 
       - name: Build site
