@@ -4,7 +4,16 @@
 \alias{predict.gpss}
 \title{predict method for \code{gpss} objects}
 \usage{
-\method{predict}{gpss}(object, newdata = NULL, type = "response")
+\method{predict}{gpss}(object, newdata = NULL, type = "response", format = "default")
+}
+\arguments{
+\item{object}{a model object for which prediction is desired.}
+
+\item{newdata}{data frame on which to make predictions (test set)}
+
+\item{type}{"response" or "scaled"}
+
+\item{format}{"default" or "rvar"}
 }
 \description{
 predict method for \code{gpss} objects
