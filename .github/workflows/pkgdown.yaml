@@ -32,16 +32,16 @@ jobs:
         with:
           use-public-rspm: true
 
-      - uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          extra-packages: any::pkgdown, local::.
-          needs: website
-
       - name: Install dependencies explicitly
         run: |
           Rscript -e 'install.packages("remotes", repos = "https://cloud.r-project.org")'
           Rscript -e 'remotes::install_github("chadhazlett/KBAL")'
           Rscript -e 'install.packages(c("sessioninfo", "pkgdown"), repos = "https://cloud.r-project.org")'
+
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: any::pkgdown, local::.
+          needs: website
 
 
       - name: Build site
