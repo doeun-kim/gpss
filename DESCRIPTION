@@ -1,6 +1,6 @@
 Package: gpss
 Title: Gaussian Processes in Social Science
-Version: 0.1
+Version: 0.0.1
 Authors@R: 
    c(person("Soonhong", "Cho", , "tnsehdtm@gmail.com", role = c("aut")),
     person("Doeun", "Kim", , "doeun2@ucla.edu", role = c("aut"),
