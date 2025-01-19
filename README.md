@@ -63,6 +63,12 @@ have these, but you can install them by running:
 xcode-select --install
 ```
 
+You may need to install the `armadillo` software to compile the package. This can be done using [the Homebrew package manager](https://brew.sh/).
+
+```bash
+brew install armadillo
+```
+
 If you are having problems with this install on Mac OSX, specifically if
 you are getting errors with either `lgfortran` or `lquadmath`, then try
 open your Terminal and try the following:
