@@ -32,11 +32,6 @@ jobs:
         with:
           use-public-rspm: true
 
-      # Disable lockfile creation
-      - name: Disable lockfile creation
-        run: |
-          Rscript -e 'options(pak.lockfile.create = FALSE)'
-
       # Add step to install kbal from GitHub
       - name: Install kbal from GitHub
         run: |
