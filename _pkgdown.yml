@@ -1,4 +1,4 @@
-url: ~
+url: https://doeunkim.org/gpss/
 template:
   bootstrap: 5
 
@@ -14,6 +14,8 @@ navbar:
 reference:
   - title: Main Functions
   - contents:
+    - gpss
+    - predict.gpss
     - gp_train
     - gp_predict
     - gp_rdd

@@ -4,6 +4,7 @@
 # gpss
 
 <!-- badges: start -->
+
 <!-- badges: end -->
 
 The Gaussian Process (GP) combines a highly flexible non-linear
@@ -81,7 +82,30 @@ sudo tar fvxz gfortran-4.8.2-darwin13.tar.bz2 -C /
 Also see section 2.16
 [here](http://dirk.eddelbuettel.com/code/rcpp/Rcpp-FAQ.pdf)
 
-## Example
+## Examples
+
+### Formula interface
+
+``` r
+library(gpss)
+data(lalonde)
+# categorical variables must be encoded as factors
+dat <- transform(lalonde, race_ethnicity = factor(race_ethnicity))
+# train and test sets
+idx <- sample(seq_len(nrow(dat)), 500)
+dat_train <- dat[idx, ]
+dat_test <- dat[-idx, ]
+# sample of data for speed
+mod <- gpss(re78 ~ nsw + age + educ + race_ethnicity, data = dat_train)
+# predictions in the test set
+p <- predict(mod, dat_test)
+length(p)
+#> [1] 2175
+head(p)
+#> [1] 21656.54 20947.01 22602.46 15800.08 17971.55 10245.55
+```
+
+### Matrix interface
 
 ``` r
 library(gpss)
