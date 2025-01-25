@@ -277,6 +277,7 @@ gp_predict <- function(gp, Xtest){
                   Ys_cov_scaled = Ys_cov_scaled,
                   Ys_cov_orig = Ys_cov_orig,
                   f_cov_orig = f_cov_orig,
+                  f_cov = f_cov,
                   b = gp$b,
                   s2 = gp$s2)
   return(results)
