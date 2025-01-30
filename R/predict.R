@@ -6,7 +6,19 @@
 #' @param interval "prediction" or "confidence"
 #' @param level a numerical value between 0 and 1
 #' @inheritParams stats::predict
-#'
+#' @examples
+#' library(gpss)
+#' data(lalonde)
+#' # categorical variables must be encoded as factors
+#' dat <- transform(lalonde, race_ethnicity = factor(race_ethnicity))
+#' # train and test sets
+#' idx <- sample(seq_len(nrow(dat)), 500)
+#' dat_train <- dat[idx, ]
+#' dat_test <- dat[-idx, ]
+#' # sample of data for speed
+#' mod <- gpss(re78 ~ nsw + age + educ + race_ethnicity, data = dat_train)
+#' p <- priedct(mod)
+#' p_confidence99 <- predict(mod, interval = "confidence", level = 0.99)
 #' @export
 predict.gpss <- function(object, newdata = NULL, type = "response", format = "default", interval = "confidence", level = 0.95) {
   if (!isTRUE(format %in% c("default", "rvar"))) {

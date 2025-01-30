@@ -1,4 +1,4 @@
-#' print method for objects of class gpss
+#' summary method for objects of class gpss
 #'
 #' @param x gpss object
 #' @examples
@@ -12,22 +12,30 @@
 #' dat_test <- dat[-idx, ]
 #' # sample of data for speed
 #' mod <- gpss(re78 ~ nsw + age + educ + race_ethnicity, data = dat_train)
-#' print(mod)
+#' summary(mod)
 #' @export
-print.gpss <- function(x) {
-  cat("gpss object contains information, including...\n")
+summary.gpss <- function(x) {
+  cat("Basic Model Information\n")
   cat("formula: "); print(attr(x, "formula"))
-  cat("b (bandwidth):", x$b, "\n")
-  cat("s2 (noise variance):", x$s2, "\n")
+  cat("number of observations: ", dim(x$Y)[1], "\n")
+  cat("number of covariates: ", dim(x$X)[2], "\n")
   cat("mixed data (containing a categorical variable?):", x$mixed_data, "\n")
   if(x$mixed_data == TRUE){
     cat("categorical columns:", x$cat_columns,"\n")
-    cat("categorical column numbers:", x$cat_num,"\n\n")
   }else{
     cat("\n")
   }
-  cat("Other available information: posterior mean (scaled and original), posterior covariance (scaled and original), a kernel matrix of X, original values of Y and X, etc.", "\n\n")
-  cat("For more detailed information, please use `summary(gpss object)`")
+
+  cat("Hyperparrameters\n")
+  cat("b (bandwidth):", x$b, "\n")
+  cat("s2 (noise variance):", x$s2, "\n\n")
+
+  cat("Scaling information\n")
+  cat("scaled:", x$mixed_data, "\n\n")
+
+  cat("Usage Example\n")
+  cat("e.g. fit <- gpss(Y~X)")
+  cat("to extract SEs of fitted values: sqrt(diag(fit$post_cov_orig))")
 }
 
 
