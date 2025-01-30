@@ -8,7 +8,7 @@
 #' @inheritParams stats::predict
 #'
 #' @export
-predict.gpss <- function(object, newdata = NULL, type = "response", format = "default", interval = "prediction", level = 0.95) {
+predict.gpss <- function(object, newdata = NULL, type = "response", format = "default", interval = "confidence", level = 0.95) {
   if (!isTRUE(format %in% c("default", "rvar"))) {
     msg <- '`format` must be "default" or "rvar".'
     stop(msg, call. = FALSE)
