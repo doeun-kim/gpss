@@ -57,16 +57,16 @@ predict.gpss <- function(object, newdata = NULL, type = "response", format = "de
   if (type == "response"){
     fit  <- out$Ys_mean_orig
     if (interval == "prediction"){
-      gp_cov <- out$f_cov_orig
-    } else if (interval == "confidence"){
       gp_cov <- out$Ys_cov_orig
+    } else if (interval == "confidence"){
+      gp_cov <- out$f_cov_orig
     }
   } else if (type == "scaled"){
     fit <- out$Ys_mean_scaled
     if(interval == "prediction"){
-      gp_cov <- out$f_cov
-    } else if (interval == "confidence"){
       gp_cov <- out$Ys_cov_scaled
+    } else if (interval == "confidence"){
+      gp_cov <- out$f_cov
     }
   }
 
