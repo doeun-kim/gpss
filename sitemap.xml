@@ -1,48 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>/articles/how-to-use-gp.html</loc>
-  </url>
-  <url>
-    <loc>/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gp_optimize.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gp_predict.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gp_rdd.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gp_rdd_plot.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gp_train.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gpss.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mixed_data_processing.html</loc>
-  </url>
-  <url>
-    <loc>/reference/one_hot.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://doeunkim.org/gpss/404.html</loc></url>
+<url><loc>https://doeunkim.org/gpss/LICENSE.html</loc></url>
+<url><loc>https://doeunkim.org/gpss/articles/how-to-use-gp.html</loc></url>
+<url><loc>https://doeunkim.org/gpss/articles/index.html</loc></url>
+<url><loc>https://doeunkim.org/gpss/authors.html</loc></url>
+<url><loc>https://doeunkim.org/gpss/index.html</loc></url>
+<url><loc>https://doeunkim.org/gpss/reference/gp_optimize.html</loc></url>
+<url><loc>https://doeunkim.org/gpss/reference/gp_predict.html</loc></url>
+<url><loc>https://doeunkim.org/gpss/reference/gp_rdd.html</loc></url>
+<url><loc>https://doeunkim.org/gpss/reference/gp_rdd_plot.html</loc></url>
+<url><loc>https://doeunkim.org/gpss/reference/gp_train.html</loc></url>
+<url><loc>https://doeunkim.org/gpss/reference/gpss.html</loc></url>
+<url><loc>https://doeunkim.org/gpss/reference/index.html</loc></url>
+<url><loc>https://doeunkim.org/gpss/reference/mixed_data_processing.html</loc></url>
+<url><loc>https://doeunkim.org/gpss/reference/one_hot.html</loc></url>
+<url><loc>https://doeunkim.org/gpss/reference/predict.gpss.html</loc></url>
+<url><loc>https://doeunkim.org/gpss/reference/print.gpss.html</loc></url>
+<url><loc>https://doeunkim.org/gpss/reference/summary.gpss.html</loc></url>
 </urlset>
+

@@ -1,7 +1,9 @@
-pandoc: 3.1.11
-pkgdown: 2.0.7
+pandoc: '3.2'
+pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
-  how-to-use-gp: how-to-use-gp.html
-last_built: 2024-07-21T04:15Z
-
+  articles/how-to-use-gp: how-to-use-gp.html
+last_built: 2025-01-30T02:17Z
+urls:
+  reference: https://doeunkim.org/gpss/reference
+  article: https://doeunkim.org/gpss/articles
