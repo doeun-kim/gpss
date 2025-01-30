@@ -20,6 +20,8 @@ reference:
     - gp_predict
     - gp_rdd
     - gp_rdd_plot
+    - print.gpss
+    - summary.gpss
   - title: Internal Functions
   - contents:
     - gp_optimize

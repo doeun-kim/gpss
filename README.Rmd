@@ -75,6 +75,11 @@ dat_train <- dat[idx, ]
 dat_test <- dat[-idx, ]
 # sample of data for speed
 mod <- gpss(re78 ~ nsw + age + educ + race_ethnicity, data = dat_train)
+
+#you can use print() and summary() with a gpss object:
+#print(mod)
+#summary(mod)
+
 # predictions in the test set
 p <- predict(mod, dat_test)
 length(p)

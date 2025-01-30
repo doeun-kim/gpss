@@ -4,7 +4,14 @@
 \alias{predict.gpss}
 \title{predict method for \code{gpss} objects}
 \usage{
-\method{predict}{gpss}(object, newdata = NULL, type = "response", format = "default")
+\method{predict}{gpss}(
+  object,
+  newdata = NULL,
+  type = "response",
+  format = "default",
+  interval = "confidence",
+  level = 0.95
+)
 }
 \arguments{
 \item{object}{a model object for which prediction is desired.}
@@ -14,7 +21,25 @@
 \item{type}{"response" or "scaled"}
 
 \item{format}{"default" or "rvar"}
+
+\item{interval}{"prediction" or "confidence"}
+
+\item{level}{a numerical value between 0 and 1}
 }
 \description{
 predict method for \code{gpss} objects
+}
+\examples{
+library(gpss)
+data(lalonde)
+# categorical variables must be encoded as factors
+dat <- transform(lalonde, race_ethnicity = factor(race_ethnicity))
+# train and test sets
+idx <- sample(seq_len(nrow(dat)), 500)
+dat_train <- dat[idx, ]
+dat_test <- dat[-idx, ]
+# sample of data for speed
+mod <- gpss(re78 ~ nsw + age + educ + race_ethnicity, data = dat_train)
+p <- predict(mod)
+p_confidence99 <- predict(mod, interval = "confidence", level = 0.99)
 }

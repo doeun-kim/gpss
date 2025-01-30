@@ -4,7 +4,6 @@
 # gpss
 
 <!-- badges: start -->
-
 <!-- badges: end -->
 
 The Gaussian Process (GP) combines a highly flexible non-linear
@@ -64,9 +63,10 @@ have these, but you can install them by running:
 xcode-select --install
 ```
 
-You may need to install the `armadillo` software to compile the package. This can be done using [the Homebrew package manager](https://brew.sh/).
+You may need to install the `armadillo` software to compile the package.
+This can be done using [the Homebrew package manager](https://brew.sh/).
 
-```bash
+``` bash
 brew install armadillo
 ```
 
@@ -97,12 +97,23 @@ dat_train <- dat[idx, ]
 dat_test <- dat[-idx, ]
 # sample of data for speed
 mod <- gpss(re78 ~ nsw + age + educ + race_ethnicity, data = dat_train)
+
+#you can use print() and summary() with a gpss object:
+#print(mod)
+#summary(mod)
+
 # predictions in the test set
 p <- predict(mod, dat_test)
 length(p)
-#> [1] 2175
+#> [1] 6525
 head(p)
-#> [1] 21656.54 20947.01 22602.46 15800.08 17971.55 10245.55
+#>            fit       lwr      upr
+#> [1,] 22408.906 20284.161 24533.65
+#> [2,] 17947.976 12033.285 23862.67
+#> [3,] 17501.271 14675.931 20326.61
+#> [4,]  8826.611 -2288.528 19941.75
+#> [5,] 22408.906 20284.161 24533.65
+#> [6,] 15825.048 13109.529 18540.57
 ```
 
 ### Matrix interface

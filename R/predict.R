@@ -17,7 +17,7 @@
 #' dat_test <- dat[-idx, ]
 #' # sample of data for speed
 #' mod <- gpss(re78 ~ nsw + age + educ + race_ethnicity, data = dat_train)
-#' p <- priedct(mod)
+#' p <- predict(mod)
 #' p_confidence99 <- predict(mod, interval = "confidence", level = 0.99)
 #' @export
 predict.gpss <- function(object, newdata = NULL, type = "response", format = "default", interval = "confidence", level = 0.95) {
