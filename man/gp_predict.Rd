@@ -4,12 +4,14 @@
 \alias{gp_predict}
 \title{gp_predict}
 \usage{
-gp_predict(gp, Xtest)
+gp_predict(gp, Xtest, prior_mean = NULL)
 }
 \arguments{
 \item{gp}{a list-form object obtained from gp_train()}
 
 \item{Xtest}{a data frame or a matrix of testing data set}
+
+\item{prior_mean}{a numeric vector of prior mean values for Y at each test point. Required when the model was trained with a \code{prior_mean}; added to \code{Ys_mean_orig} to recover predictions on the original Y scale. Must be the same length as \code{nrow(Xtest)}. (default = NULL)}
 }
 \value{
 \item{Xtest_scaled}{testing data in a scaled form}
@@ -24,21 +26,4 @@ gp_predict(gp, Xtest)
 }
 \description{
 to predict outcome values at testing points by feeding the results obtained from gp_train()
-}
-\examples{
-data(lalonde)
-cat_vars <- c("race_ethnicity", "married")
-all_vars <- c("age","educ","re74","re75","married", "race_ethnicity")
-
-X <- lalonde[,all_vars]
-Y <- lalonde$re78
-D <- lalonde$nsw
-
-X_train <- X[D==0,]
-Y_train <- Y[D==0]
-X_test <- X[D == 1,]
-Y_test <- Y[D == 1]
-
-gp_train.out <- gp_train(X = X_train, Y = Y_train, optimize=TRUE, mixed_data = TRUE, cat_columns = cat_vars)
-gp_predict.out <- gp_predict(gp_train.out, X_test)
 }

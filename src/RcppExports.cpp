@@ -11,31 +11,6 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
-// kernel
-arma::mat kernel(arma::mat x1, arma::mat x2, double b);
-RcppExport SEXP _gpss_kernel(SEXP x1SEXP, SEXP x2SEXP, SEXP bSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::mat >::type x1(x1SEXP);
-    Rcpp::traits::input_parameter< arma::mat >::type x2(x2SEXP);
-    Rcpp::traits::input_parameter< double >::type b(bSEXP);
-    rcpp_result_gen = Rcpp::wrap(kernel(x1, x2, b));
-    return rcpp_result_gen;
-END_RCPP
-}
-// kernel_symmetric
-arma::mat kernel_symmetric(arma::mat x, double b);
-RcppExport SEXP _gpss_kernel_symmetric(SEXP xSEXP, SEXP bSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::mat >::type x(xSEXP);
-    Rcpp::traits::input_parameter< double >::type b(bSEXP);
-    rcpp_result_gen = Rcpp::wrap(kernel_symmetric(x, b));
-    return rcpp_result_gen;
-END_RCPP
-}
 // kernel_linear_cpp
 arma::mat kernel_linear_cpp(arma::mat x1, arma::mat x2, double sigma_f);
 RcppExport SEXP _gpss_kernel_linear_cpp(SEXP x1SEXP, SEXP x2SEXP, SEXP sigma_fSEXP) {
@@ -91,14 +66,151 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// kernel_gaussian
+arma::mat kernel_gaussian(arma::mat x1, arma::mat x2, double b);
+RcppExport SEXP _gpss_kernel_gaussian(SEXP x1SEXP, SEXP x2SEXP, SEXP bSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type x1(x1SEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type x2(x2SEXP);
+    Rcpp::traits::input_parameter< double >::type b(bSEXP);
+    rcpp_result_gen = Rcpp::wrap(kernel_gaussian(x1, x2, b));
+    return rcpp_result_gen;
+END_RCPP
+}
+// kernel_symmetric_gaussian
+arma::mat kernel_symmetric_gaussian(arma::mat x, double b);
+RcppExport SEXP _gpss_kernel_symmetric_gaussian(SEXP xSEXP, SEXP bSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type x(xSEXP);
+    Rcpp::traits::input_parameter< double >::type b(bSEXP);
+    rcpp_result_gen = Rcpp::wrap(kernel_symmetric_gaussian(x, b));
+    return rcpp_result_gen;
+END_RCPP
+}
+// kernel_gaussian_linear
+arma::mat kernel_gaussian_linear(arma::mat x1, arma::mat x2, double b);
+RcppExport SEXP _gpss_kernel_gaussian_linear(SEXP x1SEXP, SEXP x2SEXP, SEXP bSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type x1(x1SEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type x2(x2SEXP);
+    Rcpp::traits::input_parameter< double >::type b(bSEXP);
+    rcpp_result_gen = Rcpp::wrap(kernel_gaussian_linear(x1, x2, b));
+    return rcpp_result_gen;
+END_RCPP
+}
+// kernel_symmetric_gaussian_linear
+arma::mat kernel_symmetric_gaussian_linear(arma::mat x, double b);
+RcppExport SEXP _gpss_kernel_symmetric_gaussian_linear(SEXP xSEXP, SEXP bSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type x(xSEXP);
+    Rcpp::traits::input_parameter< double >::type b(bSEXP);
+    rcpp_result_gen = Rcpp::wrap(kernel_symmetric_gaussian_linear(x, b));
+    return rcpp_result_gen;
+END_RCPP
+}
+// kernel_gaussian_quadratic
+arma::mat kernel_gaussian_quadratic(arma::mat x1, arma::mat x2, double b);
+RcppExport SEXP _gpss_kernel_gaussian_quadratic(SEXP x1SEXP, SEXP x2SEXP, SEXP bSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type x1(x1SEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type x2(x2SEXP);
+    Rcpp::traits::input_parameter< double >::type b(bSEXP);
+    rcpp_result_gen = Rcpp::wrap(kernel_gaussian_quadratic(x1, x2, b));
+    return rcpp_result_gen;
+END_RCPP
+}
+// kernel_symmetric_gaussian_quadratic
+arma::mat kernel_symmetric_gaussian_quadratic(arma::mat x, double b);
+RcppExport SEXP _gpss_kernel_symmetric_gaussian_quadratic(SEXP xSEXP, SEXP bSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type x(xSEXP);
+    Rcpp::traits::input_parameter< double >::type b(bSEXP);
+    rcpp_result_gen = Rcpp::wrap(kernel_symmetric_gaussian_quadratic(x, b));
+    return rcpp_result_gen;
+END_RCPP
+}
+// kernel_gaussian_periodic_linear
+arma::mat kernel_gaussian_periodic_linear(arma::mat x1, arma::mat x2, double b, double period);
+RcppExport SEXP _gpss_kernel_gaussian_periodic_linear(SEXP x1SEXP, SEXP x2SEXP, SEXP bSEXP, SEXP periodSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type x1(x1SEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type x2(x2SEXP);
+    Rcpp::traits::input_parameter< double >::type b(bSEXP);
+    Rcpp::traits::input_parameter< double >::type period(periodSEXP);
+    rcpp_result_gen = Rcpp::wrap(kernel_gaussian_periodic_linear(x1, x2, b, period));
+    return rcpp_result_gen;
+END_RCPP
+}
+// kernel_symmetric_gaussian_periodic_linear
+arma::mat kernel_symmetric_gaussian_periodic_linear(arma::mat x, double b, double period);
+RcppExport SEXP _gpss_kernel_symmetric_gaussian_periodic_linear(SEXP xSEXP, SEXP bSEXP, SEXP periodSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type x(xSEXP);
+    Rcpp::traits::input_parameter< double >::type b(bSEXP);
+    Rcpp::traits::input_parameter< double >::type period(periodSEXP);
+    rcpp_result_gen = Rcpp::wrap(kernel_symmetric_gaussian_periodic_linear(x, b, period));
+    return rcpp_result_gen;
+END_RCPP
+}
+// kernel_gaussian_periodic_quadratic
+arma::mat kernel_gaussian_periodic_quadratic(arma::mat x1, arma::mat x2, double b, double period);
+RcppExport SEXP _gpss_kernel_gaussian_periodic_quadratic(SEXP x1SEXP, SEXP x2SEXP, SEXP bSEXP, SEXP periodSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type x1(x1SEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type x2(x2SEXP);
+    Rcpp::traits::input_parameter< double >::type b(bSEXP);
+    Rcpp::traits::input_parameter< double >::type period(periodSEXP);
+    rcpp_result_gen = Rcpp::wrap(kernel_gaussian_periodic_quadratic(x1, x2, b, period));
+    return rcpp_result_gen;
+END_RCPP
+}
+// kernel_symmetric_gaussian_periodic_quadratic
+arma::mat kernel_symmetric_gaussian_periodic_quadratic(arma::mat x, double b, double period);
+RcppExport SEXP _gpss_kernel_symmetric_gaussian_periodic_quadratic(SEXP xSEXP, SEXP bSEXP, SEXP periodSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type x(xSEXP);
+    Rcpp::traits::input_parameter< double >::type b(bSEXP);
+    Rcpp::traits::input_parameter< double >::type period(periodSEXP);
+    rcpp_result_gen = Rcpp::wrap(kernel_symmetric_gaussian_periodic_quadratic(x, b, period));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_gpss_kernel", (DL_FUNC) &_gpss_kernel, 3},
-    {"_gpss_kernel_symmetric", (DL_FUNC) &_gpss_kernel_symmetric, 2},
     {"_gpss_kernel_linear_cpp", (DL_FUNC) &_gpss_kernel_linear_cpp, 3},
     {"_gpss_kernel_se_cpp", (DL_FUNC) &_gpss_kernel_se_cpp, 4},
     {"_gpss_kernel_periodic_cpp", (DL_FUNC) &_gpss_kernel_periodic_cpp, 5},
     {"_gpss_log_marginal_likelihood_cpp", (DL_FUNC) &_gpss_log_marginal_likelihood_cpp, 3},
+    {"_gpss_kernel_gaussian", (DL_FUNC) &_gpss_kernel_gaussian, 3},
+    {"_gpss_kernel_symmetric_gaussian", (DL_FUNC) &_gpss_kernel_symmetric_gaussian, 2},
+    {"_gpss_kernel_gaussian_linear", (DL_FUNC) &_gpss_kernel_gaussian_linear, 3},
+    {"_gpss_kernel_symmetric_gaussian_linear", (DL_FUNC) &_gpss_kernel_symmetric_gaussian_linear, 2},
+    {"_gpss_kernel_gaussian_quadratic", (DL_FUNC) &_gpss_kernel_gaussian_quadratic, 3},
+    {"_gpss_kernel_symmetric_gaussian_quadratic", (DL_FUNC) &_gpss_kernel_symmetric_gaussian_quadratic, 2},
+    {"_gpss_kernel_gaussian_periodic_linear", (DL_FUNC) &_gpss_kernel_gaussian_periodic_linear, 4},
+    {"_gpss_kernel_symmetric_gaussian_periodic_linear", (DL_FUNC) &_gpss_kernel_symmetric_gaussian_periodic_linear, 3},
+    {"_gpss_kernel_gaussian_periodic_quadratic", (DL_FUNC) &_gpss_kernel_gaussian_periodic_quadratic, 4},
+    {"_gpss_kernel_symmetric_gaussian_periodic_quadratic", (DL_FUNC) &_gpss_kernel_symmetric_gaussian_periodic_quadratic, 3},
     {NULL, NULL, 0}
 };
 

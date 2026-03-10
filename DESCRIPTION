@@ -1,6 +1,6 @@
 Package: gpss
 Title: Gaussian Processes in Social Science
-Version: 0.0.1
+Version: 0.1.0
 Authors@R: 
    c(person("Soonhong", "Cho", , "tnsehdtm@gmail.com", role = c("aut")),
     person("Doeun", "Kim", , "doeun2@ucla.edu", role = c("aut"),
@@ -14,15 +14,14 @@ RoxygenNote: 7.3.2
 URL: http://doeunkim.org/gpss/
 BugReports: https://github.com/doeun-kim/gpss/issues
 Imports:
-    kbal,
-    Rcpp (>= 1.0.6),
+    Rcpp (>= 1.0.14),
+    MASS,
     Matrix,
-    ggplot2
+    ggplot2,
+    rlang
 LinkingTo: Rcpp, RcppArmadillo
-Remotes: 
-    chadhazlett/KBAL
 Depends: 
-    R (>= 2.10)
+    R (>= 3.5.0)
 LazyData: true
 Suggests: 
     posterior,

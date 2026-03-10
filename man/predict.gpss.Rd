@@ -10,7 +10,9 @@
   type = "response",
   format = "default",
   interval = "confidence",
-  level = 0.95
+  level = 0.95,
+  prior_mean = NULL,
+  ...
 )
 }
 \arguments{
@@ -25,6 +27,10 @@
 \item{interval}{"prediction" or "confidence"}
 
 \item{level}{a numerical value between 0 and 1}
+
+\item{prior_mean}{a numeric vector of prior mean values for Y at each test observation. Required when the model was trained with a \code{prior_mean}; see \code{\link{gp_predict}}. (default = NULL)}
+
+\item{...}{additional arguments (not used)}
 }
 \description{
 predict method for \code{gpss} objects

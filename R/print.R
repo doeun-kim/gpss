@@ -13,21 +13,31 @@
 #' # sample of data for speed
 #' mod <- gpss(re78 ~ nsw + age + educ + race_ethnicity, data = dat_train)
 #' print(mod)
-#' @export
-print.gpss <- function(x) {
-  cat("gpss object contains information, including...\n")
-  cat("formula: "); print(attr(x, "formula"))
-  cat("b (bandwidth):", x$b, "\n")
-  cat("s2 (noise variance):", x$s2, "\n")
-  cat("mixed data (containing a categorical variable?):", x$mixed_data, "\n")
-  if(x$mixed_data == TRUE){
-    cat("categorical columns:", x$cat_columns,"\n")
-    cat("categorical column numbers:", x$cat_num,"\n\n")
-  }else{
-    cat("\n")
+#' @keywords internal
+#' @noRd
+print.gpss <- function(x, ...) {
+  cat("gpss object\n")
+  cat("===========\n")
+  cat("Formula: "); print(attr(x, "formula"))
+  cat("Kernel type:", x$kernel_type, "\n")
+  cat("Bandwidth (b):", x$b, "\n")
+  cat("Noise variance (s2):", x$s2, "\n")
+
+  # Periodic kernel info
+  if (!is.null(x$period_original)) {
+    cat("Period (original):", x$period_original, "\n")
+    cat("Period (scaled):", x$period_scaled, "\n")
+    if (!is.null(x$time_col)) {
+      cat("Time column:", x$time_col, "\n")
+    }
   }
-  cat("Other available information: posterior mean (scaled and original), posterior covariance (scaled and original), a kernel matrix of X, original values of Y and X, etc.", "\n\n")
-  cat("For more detailed information, please use `summary(gpss object)`")
+
+  # Mixed data info
+  cat("Mixed data:", x$mixed_data, "\n")
+  if (isTRUE(x$mixed_data)) {
+    cat("Categorical columns:", x$cat_columns, "\n")
+  }
+
+  cat("\nUse `summary()` for more details.\n")
+  invisible(x)
 }
-
-

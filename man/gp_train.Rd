@@ -11,9 +11,13 @@ gp_train(
   s2 = 0.3,
   optimize = FALSE,
   scale = TRUE,
+  kernel_type = "gaussian",
+  period = NULL,
+  time_col = NULL,
   mixed_data = FALSE,
   cat_columns = NULL,
-  Xtest = NULL
+  Xtest = NULL,
+  prior_mean = NULL
 )
 }
 \arguments{
@@ -29,11 +33,19 @@ gp_train(
 
 \item{scale}{a logical value to indicate whether covariates should be scaled. (dafault = TRUE)}
 
+\item{kernel_type}{a character value indicating the kernel type (default = "gaussian")}
+
+\item{period}{a numeric value for the period parameter, required for periodic kernels (default = NULL)}
+
+\item{time_col}{a character or numeric value indicating which column is the time variable. If specified, this column will be moved to the first position for correct period scaling in periodic kernels. (default = NULL)}
+
 \item{mixed_data}{a logical value to indicate whether the covariates contain a categorical/binary variable (default = FALSE)}
 
-\item{cat_columns}{a character or a numerical vector indicating categorical variables (default = NULL)}
+\item{cat_columns}{a character or a numerical vector indicating categorical variables. Must be character (not numeric) when time_col is specified. (default = NULL)}
 
 \item{Xtest}{a data frame or a matrix of testing covariates. This is necessary when a non-overlapping categorical value exists between training and testing data sets. (default = NULL)}
+
+\item{prior_mean}{a numeric vector of prior mean values for Y at each training observation. If provided, the GP is fitted to the residuals (Y - prior_mean), and the prior mean is added back to recover predictions on the original Y scale. Must be the same length as Y. (default = NULL)}
 }
 \value{
 \item{post_mean_scaled}{posterior distribution of Y in a scaled form}
@@ -58,25 +70,10 @@ gp_train(
 \item{mixed_data}{a logical value indicating whether X contains a categorical/binary variable}
 \item{cat_columns}{a character or a numerical vector indicating the location of categorical/binary variables in X}
 \item{cat_num}{a numerical vector indicating the location of categorical/binary variables in an expanded version of X}
+\item{time_col}{the time column specification used (or NULL if not specified)}
 \item{Xcolnames}{column names of X}
+\item{prior_mean}{the prior mean vector supplied at training (or NULL)}
 }
 \description{
 to train GP model with training data set
-}
-\examples{
-data(lalonde)
-cat_vars <- c("race_ethnicity", "married")
-all_vars <- c("age","educ","re74","re75","married", "race_ethnicity")
-
-X <- lalonde[,all_vars]
-Y <- lalonde$re78
-D <- lalonde$nsw
-
-X_train <- X[D==0,]
-Y_train <- Y[D==0]
-X_test <- X[D == 1,]
-Y_test <- Y[D == 1]
-
-gp_train.out <- gp_train(X = X_train, Y = Y_train, optimize=TRUE, mixed_data = TRUE, cat_columns = cat_vars)
-gp_predict.out <- gp_predict(gp_train.out, X_test)
 }

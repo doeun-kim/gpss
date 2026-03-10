@@ -6,9 +6,21 @@
 \alias{gpss}
 \title{gpss: Gaussian Processes in Social Science}
 \usage{
-gpss(formula, data, b = NULL, s2 = 0.3, optimize = FALSE, scale = TRUE)
+gpss(
+  formula,
+  data,
+  b = NULL,
+  s2 = 0.3,
+  optimize = FALSE,
+  scale = TRUE,
+  prior_mean = NULL
+)
 }
 \arguments{
+\item{formula}{an object of class "formula": a symbolic description of the model to be fitted}
+
+\item{data}{a data frame containing the variables in the model.}
+
 \item{b}{bandwidth (default = NULL)}
 
 \item{s2}{noise or a fraction of Y not explained by X (default = 0.3)}
@@ -16,6 +28,8 @@ gpss(formula, data, b = NULL, s2 = 0.3, optimize = FALSE, scale = TRUE)
 \item{optimize}{a logical value to indicate whether an automatic optimized value of S2 should be used. If FALSE, users must define s2. (default = FALSE)}
 
 \item{scale}{a logical value to indicate whether covariates should be scaled. (dafault = TRUE)}
+
+\item{prior_mean}{a numeric vector of prior mean values for Y at each training observation. See \code{\link{gp_train}} for details. (default = NULL)}
 }
 \value{
 \item{post_mean_scaled}{posterior distribution of Y in a scaled form}
@@ -40,7 +54,9 @@ gpss(formula, data, b = NULL, s2 = 0.3, optimize = FALSE, scale = TRUE)
 \item{mixed_data}{a logical value indicating whether X contains a categorical/binary variable}
 \item{cat_columns}{a character or a numerical vector indicating the location of categorical/binary variables in X}
 \item{cat_num}{a numerical vector indicating the location of categorical/binary variables in an expanded version of X}
+\item{time_col}{the time column specification used (or NULL if not specified)}
 \item{Xcolnames}{column names of X}
+\item{prior_mean}{the prior mean vector supplied at training (or NULL)}
 }
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
