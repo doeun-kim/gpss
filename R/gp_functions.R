@@ -72,6 +72,24 @@ gp_optimize <- function(K, Y, optim.tol=0.1) {
 #' \item{time_col}{the time column specification used (or NULL if not specified)}
 #' \item{Xcolnames}{column names of X}
 #' \item{prior_mean}{the prior mean vector supplied at training (or NULL)}
+#' @examples
+#' data(lalonde)
+#' cat_vars <- c("race_ethnicity", "married")
+#' all_vars <- c("age","educ","re74","re75","married", "race_ethnicity")
+#'
+#' X <- lalonde[,all_vars]
+#' Y <- lalonde$re78
+#' D <- lalonde$nsw
+#'
+#' X_train <- X[D==0,]
+#' Y_train <- Y[D==0]
+#' X_test <- X[D == 1,]
+#' Y_test <- Y[D == 1]
+#'
+#' gp_train.out <- gp_train(X = X_train, Y = Y_train,
+#' optimize=TRUE, mixed_data = TRUE,
+#' cat_columns = cat_vars)
+#' gp_predict.out <- gp_predict(gp_train.out, X_test)
 #' @importFrom stats sd
 #' @importFrom Rcpp sourceCpp
 #'
@@ -321,6 +339,24 @@ gp_train <- function(X, Y, b = NULL, s2 = 0.3, optimize = FALSE,
 #' @param gp a list-form object obtained from gp_train()
 #' @param Xtest a data frame or a matrix of testing data set
 #' @param prior_mean a numeric vector of prior mean values for Y at each test point. Required when the model was trained with a \code{prior_mean}; added to \code{Ys_mean_orig} to recover predictions on the original Y scale. Must be the same length as \code{nrow(Xtest)}. (default = NULL)
+#' @examples
+#' data(lalonde)
+#' cat_vars <- c("race_ethnicity", "married")
+#' all_vars <- c("age","educ","re74","re75","married", "race_ethnicity")
+#'
+#' X <- lalonde[,all_vars]
+#' Y <- lalonde$re78
+#' D <- lalonde$nsw
+#'
+#' X_train <- X[D==0,]
+#' Y_train <- Y[D==0]
+#' X_test <- X[D == 1,]
+#' Y_test <- Y[D == 1]
+#'
+#' gp_train.out <- gp_train(X = X_train, Y = Y_train,
+#' optimize=TRUE, mixed_data = TRUE,
+#' cat_columns = cat_vars)
+#' gp_predict.out <- gp_predict(gp_train.out, X_test)
 #' @importFrom Rcpp sourceCpp
 #' @return \item{Xtest_scaled}{testing data in a scaled form}
 #' \item{Xtest}{the original testing data set}
