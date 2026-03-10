@@ -20,3 +20,8 @@ reference:
     - gp_rdd
     - gp_rdd_plot
     - gp_its
+    - predict
+
+  - title: Data
+  - contents:
+    - lalonde
