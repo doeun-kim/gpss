@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">gpss</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,7 +27,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>gp_train</h1>
-      <small class="dont-index">Source: <a href="https://github.com/doeun-kim/gpss/blob/master/R/gp_functions.R" class="external-link"><code>R/gp_functions.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/doeun-kim/gpss/blob/HEAD/R/gp_functions.R" class="external-link"><code>R/gp_functions.R</code></a></small>
       <div class="d-none name"><code>gp_train.Rd</code></div>
     </div>
 
@@ -44,9 +44,13 @@
 <span>  s2 <span class="op">=</span> <span class="fl">0.3</span>,</span>
 <span>  optimize <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  scale <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  kernel_type <span class="op">=</span> <span class="st">"gaussian"</span>,</span>
+<span>  period <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  time_col <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  mixed_data <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  cat_columns <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  Xtest <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  Xtest <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  prior_mean <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -78,16 +82,32 @@
 <dd><p>a logical value to indicate whether covariates should be scaled. (dafault = TRUE)</p></dd>
 
 
+<dt id="arg-kernel-type">kernel_type<a class="anchor" aria-label="anchor" href="#arg-kernel-type"></a></dt>
+<dd><p>a character value indicating the kernel type (default = "gaussian")</p></dd>
+
+
+<dt id="arg-period">period<a class="anchor" aria-label="anchor" href="#arg-period"></a></dt>
+<dd><p>a numeric value for the period parameter, required for periodic kernels (default = NULL)</p></dd>
+
+
+<dt id="arg-time-col">time_col<a class="anchor" aria-label="anchor" href="#arg-time-col"></a></dt>
+<dd><p>a character or numeric value indicating which column is the time variable. If specified, this column will be moved to the first position for correct period scaling in periodic kernels. (default = NULL)</p></dd>
+
+
 <dt id="arg-mixed-data">mixed_data<a class="anchor" aria-label="anchor" href="#arg-mixed-data"></a></dt>
 <dd><p>a logical value to indicate whether the covariates contain a categorical/binary variable (default = FALSE)</p></dd>
 
 
 <dt id="arg-cat-columns">cat_columns<a class="anchor" aria-label="anchor" href="#arg-cat-columns"></a></dt>
-<dd><p>a character or a numerical vector indicating categorical variables (default = NULL)</p></dd>
+<dd><p>a character or a numerical vector indicating categorical variables. Must be character (not numeric) when time_col is specified. (default = NULL)</p></dd>
 
 
 <dt id="arg-xtest">Xtest<a class="anchor" aria-label="anchor" href="#arg-xtest"></a></dt>
 <dd><p>a data frame or a matrix of testing covariates. This is necessary when a non-overlapping categorical value exists between training and testing data sets. (default = NULL)</p></dd>
+
+
+<dt id="arg-prior-mean">prior_mean<a class="anchor" aria-label="anchor" href="#arg-prior-mean"></a></dt>
+<dd><p>a numeric vector of prior mean values for Y at each training observation. If provided, the GP is fitted to the residuals (Y - prior_mean), and the prior mean is added back to recover predictions on the original Y scale. Must be the same length as Y. (default = NULL)</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -160,30 +180,17 @@
 <dt>cat_num</dt>
 <dd><p>a numerical vector indicating the location of categorical/binary variables in an expanded version of X</p></dd>
 
+<dt>time_col</dt>
+<dd><p>the time column specification used (or NULL if not specified)</p></dd>
+
 <dt>Xcolnames</dt>
 <dd><p>column names of X</p></dd>
 
+<dt>prior_mean</dt>
+<dd><p>the prior mean vector supplied at training (or NULL)</p></dd>
+
 </dl></div>
 
-    <div class="section level2">
-    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">lalonde</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">cat_vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"race_ethnicity"</span>, <span class="st">"married"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">all_vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"age"</span>,<span class="st">"educ"</span>,<span class="st">"re74"</span>,<span class="st">"re75"</span>,<span class="st">"married"</span>, <span class="st">"race_ethnicity"</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">X</span> <span class="op">&lt;-</span> <span class="va">lalonde</span><span class="op">[</span>,<span class="va">all_vars</span><span class="op">]</span></span></span>
-<span class="r-in"><span><span class="va">Y</span> <span class="op">&lt;-</span> <span class="va">lalonde</span><span class="op">$</span><span class="va">re78</span></span></span>
-<span class="r-in"><span><span class="va">D</span> <span class="op">&lt;-</span> <span class="va">lalonde</span><span class="op">$</span><span class="va">nsw</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">X_train</span> <span class="op">&lt;-</span> <span class="va">X</span><span class="op">[</span><span class="va">D</span><span class="op">==</span><span class="fl">0</span>,<span class="op">]</span></span></span>
-<span class="r-in"><span><span class="va">Y_train</span> <span class="op">&lt;-</span> <span class="va">Y</span><span class="op">[</span><span class="va">D</span><span class="op">==</span><span class="fl">0</span><span class="op">]</span></span></span>
-<span class="r-in"><span><span class="va">X_test</span> <span class="op">&lt;-</span> <span class="va">X</span><span class="op">[</span><span class="va">D</span> <span class="op">==</span> <span class="fl">1</span>,<span class="op">]</span></span></span>
-<span class="r-in"><span><span class="va">Y_test</span> <span class="op">&lt;-</span> <span class="va">Y</span><span class="op">[</span><span class="va">D</span> <span class="op">==</span> <span class="fl">1</span><span class="op">]</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">gp_train.out</span> <span class="op">&lt;-</span> <span class="fu">gp_train</span><span class="op">(</span>X <span class="op">=</span> <span class="va">X_train</span>, Y <span class="op">=</span> <span class="va">Y_train</span>, optimize<span class="op">=</span><span class="cn">TRUE</span>, mixed_data <span class="op">=</span> <span class="cn">TRUE</span>, cat_columns <span class="op">=</span> <span class="va">cat_vars</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">gp_predict.out</span> <span class="op">&lt;-</span> <span class="fu"><a href="gp_predict.html">gp_predict</a></span><span class="op">(</span><span class="va">gp_train.out</span>, <span class="va">X_test</span><span class="op">)</span></span></span>
-</code></pre></div>
-    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 

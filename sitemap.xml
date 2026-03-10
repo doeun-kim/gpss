@@ -5,17 +5,19 @@
 <url><loc>https://doeunkim.org/gpss/articles/index.html</loc></url>
 <url><loc>https://doeunkim.org/gpss/authors.html</loc></url>
 <url><loc>https://doeunkim.org/gpss/index.html</loc></url>
-<url><loc>https://doeunkim.org/gpss/reference/gp_optimize.html</loc></url>
+<url><loc>https://doeunkim.org/gpss/reference/dot-run_placebo_checks.html</loc></url>
+<url><loc>https://doeunkim.org/gpss/reference/gp_its.html</loc></url>
 <url><loc>https://doeunkim.org/gpss/reference/gp_predict.html</loc></url>
 <url><loc>https://doeunkim.org/gpss/reference/gp_rdd.html</loc></url>
 <url><loc>https://doeunkim.org/gpss/reference/gp_rdd_plot.html</loc></url>
 <url><loc>https://doeunkim.org/gpss/reference/gp_train.html</loc></url>
 <url><loc>https://doeunkim.org/gpss/reference/gpss.html</loc></url>
 <url><loc>https://doeunkim.org/gpss/reference/index.html</loc></url>
-<url><loc>https://doeunkim.org/gpss/reference/mixed_data_processing.html</loc></url>
-<url><loc>https://doeunkim.org/gpss/reference/one_hot.html</loc></url>
+<url><loc>https://doeunkim.org/gpss/reference/lalonde.html</loc></url>
 <url><loc>https://doeunkim.org/gpss/reference/predict.gpss.html</loc></url>
-<url><loc>https://doeunkim.org/gpss/reference/print.gpss.html</loc></url>
-<url><loc>https://doeunkim.org/gpss/reference/summary.gpss.html</loc></url>
+<url><loc>https://doeunkim.org/gpss/reference/print.gp_its.html</loc></url>
+<url><loc>https://doeunkim.org/gpss/reference/print.gp_rdd.html</loc></url>
+<url><loc>https://doeunkim.org/gpss/reference/summary.gp_its.html</loc></url>
+<url><loc>https://doeunkim.org/gpss/reference/summary.gp_rdd.html</loc></url>
 </urlset>
 
