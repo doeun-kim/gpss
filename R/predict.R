@@ -22,7 +22,8 @@
 #' mod <- gpss(re78 ~ nsw + age + educ + race_ethnicity, data = dat_train)
 #' p <- predict(mod, newdata = dat_test)
 #' p_confidence99 <- predict(mod, newdata = dat_test, interval = "confidence", level = 0.99)
-#' @export
+#' @keywords internal
+#' @noRd
 predict.gpss <- function(object, newdata = NULL, type = "response",
                          format = "default", interval = "confidence",
                          level = 0.95, prior_mean = NULL, ...) {
