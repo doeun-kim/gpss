@@ -15,15 +15,8 @@ reference:
   - title: Main Functions
   - contents:
     - gpss
-    - predict.gpss
     - gp_train
     - gp_predict
     - gp_rdd
     - gp_rdd_plot
-    - print.gpss
-    - summary.gpss
-  - title: Internal Functions
-  - contents:
-    - gp_optimize
-    - mixed_data_processing
-    - one_hot
+    - gp_its
