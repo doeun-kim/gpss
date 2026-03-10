@@ -20,7 +20,7 @@ reference:
     - gp_rdd
     - gp_rdd_plot
     - gp_its
-    - predict
+    - predict.gpss
 
   - title: Data
   - contents:
