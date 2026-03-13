@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">gpss</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -79,7 +79,7 @@
 
 
 <dt id="arg-scale">scale<a class="anchor" aria-label="anchor" href="#arg-scale"></a></dt>
-<dd><p>a logical value to indicate whether covariates should be scaled. (dafault = TRUE)</p></dd>
+<dd><p>a logical value to indicate whether covariates should be scaled. (default = TRUE)</p></dd>
 
 
 <dt id="arg-kernel-type">kernel_type<a class="anchor" aria-label="anchor" href="#arg-kernel-type"></a></dt>
@@ -193,7 +193,8 @@
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">lalonde</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">lalonde</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">cat_vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"race_ethnicity"</span>, <span class="st">"married"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">all_vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"age"</span>,<span class="st">"educ"</span>,<span class="st">"re74"</span>,<span class="st">"re75"</span>,<span class="st">"married"</span>, <span class="st">"race_ethnicity"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
@@ -210,6 +211,7 @@
 <span class="r-in"><span>optimize<span class="op">=</span><span class="cn">TRUE</span>, mixed_data <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
 <span class="r-in"><span>cat_columns <span class="op">=</span> <span class="va">cat_vars</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">gp_predict.out</span> <span class="op">&lt;-</span> <span class="fu"><a href="gp_predict.html">gp_predict</a></span><span class="op">(</span><span class="va">gp_train.out</span>, <span class="va">X_test</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

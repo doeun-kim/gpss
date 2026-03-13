@@ -166,7 +166,7 @@ M1](https://mpopov.com/blog/2021/10/10/even-faster-matrix-math-in-r-on-macos-wit
 ## Main Functions
 
 - [`gpss()`](https://doeunkim.org/gpss/reference/gpss.md) : gpss:
-  Gaussian Processes in Social Science
+  Gaussian Processes for Social Science
 
 - [`gp_train()`](https://doeunkim.org/gpss/reference/gp_train.md) :
   gp_train

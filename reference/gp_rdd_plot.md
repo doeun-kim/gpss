@@ -26,9 +26,7 @@ gp_rdd_plot(gp_rdd_res, l_col = "blue", r_col = "red")
 
 ## Value
 
-- gg:
-
-  an RD ggplot
+A `ggplot` object showing the RD plot.
 
 ## Examples
 

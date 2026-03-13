@@ -108,4 +108,65 @@ gp_its(
 
 ## Value
 
-Object of class "gp_its"
+An object of class `"gp_its"`, a list containing:
+
+- y:
+
+  the outcome vector
+
+- dates:
+
+  the date vector
+
+- date_treat:
+
+  the treatment date
+
+- y0_hat:
+
+  counterfactual predictions for post-treatment periods
+
+- estimates:
+
+  data frame with columns `tau_t`, `tau_cum`, `tau_avg`
+
+- se:
+
+  data frame of standard errors
+
+- ci:
+
+  data frame of confidence interval bounds
+
+- gp_model:
+
+  the fitted GP model from
+  [`gp_train`](https://doeunkim.org/gpss/reference/gp_train.md)
+
+- placebo_estimates:
+
+  placebo check results (if requested)
+
+## Examples
+
+``` r
+# \donttest{
+# Simulated interrupted time series
+set.seed(42)
+n <- 50
+dates <- seq(as.Date("2020-01-01"), by = "month", length.out = n)
+y <- rnorm(n) + c(rep(0, 30), rep(2, 20))
+res <- gp_its(y, dates, date_treat = as.Date("2022-07-01"))
+print(res)
+#> GP-ITS Model
+#> ---------------------------------------- 
+#> Observations: 50 (pre: 30, post: 20)
+#> Treatment date: 2022-07-01
+#> Kernel: gaussian
+#> Interval type: prediction (95%)
+#> 
+#> Average treatment effect (final period):
+#>   tau_avg = 1.918 (SE = 0.921)
+#>   95% CI: [0.113, 3.723]
+# }
+```

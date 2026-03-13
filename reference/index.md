@@ -3,7 +3,7 @@
 ## Main Functions
 
 - [`gpss()`](https://doeunkim.org/gpss/reference/gpss.md) : gpss:
-  Gaussian Processes in Social Science
+  Gaussian Processes for Social Science
 
 - [`gp_train()`](https://doeunkim.org/gpss/reference/gp_train.md) :
   gp_train

@@ -1,26 +1,16 @@
-# gpss: Gaussian Processes in Social Science
+# gpss: Gaussian Processes for Social Science
 
-The Gaussian Process (GP) combines a highly flexible non-linear
-regression approach with rigorous handling of uncertainty. A key feature
-of this approach is that, while it can be used to produce a conditional
-expectation function representing the mode of a posterior conditional
-distribution, it does not “choose a particular model fit” and construct
-uncertainty estimates conditional on putting full faith in that model.
-This is valuable because the uncertainty estimates reflect the lesser
-knowledge we have at locations near, at, or beyond the edge of the
-observed data, where results from other approaches would become highly
-model-dependent. We first offer an accessible explanation of GPs, and
-provide an implementation more suitable to social science inference
-problems, which reduces the number of user-chosen hyperparameters from
-three to zero. We then illustrate the settings in which GPs can be most
-valuable: those where conventional approaches have poor properties due
-to model-dependency/extrapolation in data-sparse regions. Specifically,
-we demonstrate the usefulness of GPs in contexts where (i) treated and
-control models are needed by these groups have poor covariate overlap;
-(ii) regression discontinuity, which depends on model estimates taken at
-or just beyond the edge of their supporting data; and (iii) interrupted
-time-series designs, where models are fitted prior to an event by
-extrapolated after it.
+Provides Gaussian Process (GP) regression tools for social science
+inference problems. GPs combine flexible nonparametric regression with
+principled uncertainty quantification: rather than committing to a
+single model fit, the posterior reflects lesser knowledge at the edge of
+or beyond the observed data, where other approaches become highly
+model-dependent. The package reduces user-chosen hyperparameters from
+three to zero and supplies convenience functions for regression
+discontinuity ('gp_rdd'), interrupted time-series ('gp_its'), and
+general GP fitting ('gpss', 'gp_train', 'gp_predict'). Methods are
+described in Cho, Kim, and Hazlett (2026)
+[doi:10.1017/pan.2026.10032](https://doi.org/10.1017/pan.2026.10032) .
 
 ## Usage
 
@@ -63,7 +53,7 @@ gpss(
 - scale:
 
   a logical value to indicate whether covariates should be scaled.
-  (dafault = TRUE)
+  (default = TRUE)
 
 - prior_mean:
 
@@ -182,7 +172,9 @@ gpss(
 
 Useful links:
 
-- <http://doeunkim.org/gpss/>
+- <https://doeunkim.org/gpss/>
+
+- <https://github.com/doeun-kim/gpss>
 
 - Report bugs at <https://github.com/doeun-kim/gpss/issues>
 
@@ -200,30 +192,82 @@ Authors:
 ## Examples
 
 ``` r
+# \donttest{
+# -- Basic fitting and prediction -----------------------------
 library(gpss)
 data(lalonde)
-
-# categorical variables must be encoded as factors
 dat <- transform(lalonde, race_ethnicity = factor(race_ethnicity))
 
-# train and test sets
 idx <- sample(seq_len(nrow(dat)), 500)
-dat_train <- dat[idx, ]
-dat_test <- dat[-idx, ]
-
-# Fit model
-mod <- gpss(re78 ~ nsw + age + educ + race_ethnicity, data = dat_train)
-
-# predictions in the test set
-p <- predict(mod, dat_test)
-length(p)
-#> [1] 6525
+mod <- gpss(re78 ~ nsw + age + educ + race_ethnicity, data = dat[idx, ])
+p   <- predict(mod, dat[-idx, ])
 head(p)
-#>           fit       lwr      upr
-#> [1,] 21633.55 19317.595 23949.51
-#> [2,] 11967.40  6057.383 17877.43
-#> [3,] 21674.79 19411.887 23937.69
-#> [4,] 18540.16 15892.851 21187.47
-#> [5,] 20811.21 16667.037 24955.39
-#> [6,] 20521.15  5671.156 35371.15
+#>             fit        lwr      upr
+#> [1,] 19603.7203  17317.980 21889.46
+#> [2,] 17517.0400  12644.866 22389.21
+#> [3,] 21435.1890  19262.500 23607.88
+#> [4,] 17832.7472  15209.686 20455.81
+#> [5,] 13077.4249   8776.605 17378.24
+#> [6,]   360.2888 -11517.823 12238.40
+
+# -- G-computation for the ATT (LaLonde data) ----------------
+# The LaLonde dataset pairs 185 treated units from the NSW
+# job-training program with 2490 PSID control units.  The
+# experimental benchmark ATT is about $1794, but the naive
+# difference in means is severely biased (~-$15k) due to
+# poor covariate overlap.
+#
+# Strategy: fit a GP on the control group to learn E[Y(0)|X],
+# predict counterfactual Y(0) for the treated, and compute
+# ATT = mean(Y_obs - Y0_hat) with a Neyman-style SE.
+# See Cho, Kim, and Hazlett (2026, Political Analysis).
+
+# Use gp_train / gp_predict for direct control over covariates
+cat_vars <- c("black", "hisp", "married", "nodegr", "u74", "u75")
+all_vars <- c("age", "educ", "re74", "re75",
+              "black", "hisp", "married", "nodegr", "u74", "u75")
+
+X <- lalonde[, all_vars]
+Y <- lalonde$re78
+D <- lalonde$nsw
+
+# Fit GP on control group (optimize s2 via MLE)
+gp_mod <- gp_train(X = X[D == 0, ], Y = Y[D == 0],
+                   optimize = TRUE,
+                   mixed_data = TRUE, cat_columns = cat_vars)
+
+# Predict E[Y(0) | X] for treated units
+gp_pred <- gp_predict(gp_mod, Xtest = X[D == 1, ])
+
+Y1     <- Y[D == 1]                    # observed Y(1)
+Y0_hat <- gp_pred$Ys_mean_orig         # predicted E[Y(0)|X]
+tau_i  <- Y1 - Y0_hat                  # unit-level effects
+att    <- mean(tau_i)                   # ATT point estimate
+
+# -- Neyman-style SE for the ATT --
+# Two sources of uncertainty:
+#
+# 1. Sampling variance of unit-level effects: var(tau_i) / n1
+#    This captures heterogeneity in treatment effects across
+#    units, including variation in observed Y(1).
+#
+# 2. Posterior uncertainty in the counterfactuals: because Y(0)
+#    predictions are correlated across units through the GP
+#    posterior, we need the full covariance matrix V0 = f_cov_orig
+#    (the posterior covariance of E[Y(0)|X] at treated X values).
+#    Its contribution to Var(ATT) is (1/n1^2) * sum(V0),
+#    i.e. 1'V0 1 / n1^2.
+
+n1     <- sum(D)
+V0     <- gp_pred$f_cov_orig
+se_att <- sqrt(var(tau_i) / n1 + sum(V0) / n1^2)
+
+cat(sprintf("GP ATT:  $%.0f (SE = $%.0f)\n", att, se_att))
+#> GP ATT:  $1907 (SE = $1760)
+cat(sprintf("95%% CI: [$%.0f, $%.0f]\n",
+            att - 1.96 * se_att, att + 1.96 * se_att))
+#> 95% CI: [$-1542, $5357]
+# GP estimate is close to the experimental benchmark (~$1794);
+# the wide CI reflects genuine extrapolation uncertainty.
+# }
 ```

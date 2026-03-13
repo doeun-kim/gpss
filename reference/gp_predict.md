@@ -67,6 +67,7 @@ gp_predict(gp, Xtest, prior_mean = NULL)
 ## Examples
 
 ``` r
+# \donttest{
 data(lalonde)
 cat_vars <- c("race_ethnicity", "married")
 all_vars <- c("age","educ","re74","re75","married", "race_ethnicity")
@@ -84,4 +85,5 @@ gp_train.out <- gp_train(X = X_train, Y = Y_train,
 optimize=TRUE, mixed_data = TRUE,
 cat_columns = cat_vars)
 gp_predict.out <- gp_predict(gp_train.out, X_test)
+# }
 ```
