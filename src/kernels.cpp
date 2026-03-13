@@ -245,7 +245,7 @@ arma::mat kernel_gaussian_periodic_linear(
   size_t n2 = x2.n_rows;
   size_t ncol = x1.n_cols;
   arma::mat K(n1,n2);
-  double sqdist, gaussian_part, periodic_sum, linear_part, diff;
+  double sqdist, gaussian_part, linear_part, diff;
   size_t i,j,d;
 
   for (i=0; i<n1; i++) {
@@ -280,7 +280,7 @@ arma::mat kernel_symmetric_gaussian_periodic_linear(
   size_t n = x.n_rows;
   size_t ncol = x.n_cols;
   arma::mat K(n, n);
-  double sqdist, gaussian_part, periodic_sum, linear_part, diff;
+  double sqdist, gaussian_part, linear_part, diff;
 
   for (size_t i = 0; i < n; i++) {
     for (size_t j = i; j < n; j++) {
@@ -324,7 +324,7 @@ arma::mat kernel_gaussian_periodic_quadratic(
   size_t n2 = x2.n_rows;
   size_t ncol = x1.n_cols;
   arma::mat K(n1,n2);
-  double sqdist, gaussian_part, periodic_sum, quadratic_part, dot_product, diff;
+  double sqdist, gaussian_part, quadratic_part, dot_product, diff;
   size_t i,j,d;
 
   for (i=0; i<n1; i++) {
@@ -360,7 +360,7 @@ arma::mat kernel_symmetric_gaussian_periodic_quadratic(
   size_t n = x.n_rows;
   size_t ncol = x.n_cols;
   arma::mat K(n, n);
-  double sqdist, gaussian_part, periodic_sum, quadratic_part, dot_product, diff;
+  double sqdist, gaussian_part, quadratic_part, dot_product, diff;
 
   for (size_t i = 0; i < n; i++) {
     for (size_t j = i; j < n; j++) {

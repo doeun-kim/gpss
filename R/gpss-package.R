@@ -4,6 +4,5 @@
 #' @useDynLib gpss
 "_PACKAGE"
 
-## usethis nespace: start
-## usethis namespace: endULL
-
+## usethis namespace: start
+## usethis namespace: end

@@ -31,7 +31,7 @@ gp_train(
 
 \item{optimize}{a logical value to indicate whether an automatic optimized value of S2 should be used. If FALSE, users must define s2. (default = FALSE)}
 
-\item{scale}{a logical value to indicate whether covariates should be scaled. (dafault = TRUE)}
+\item{scale}{a logical value to indicate whether covariates should be scaled. (default = TRUE)}
 
 \item{kernel_type}{a character value indicating the kernel type (default = "gaussian")}
 
@@ -78,6 +78,7 @@ gp_train(
 to train GP model with training data set
 }
 \examples{
+\donttest{
 data(lalonde)
 cat_vars <- c("race_ethnicity", "married")
 all_vars <- c("age","educ","re74","re75","married", "race_ethnicity")
@@ -95,4 +96,5 @@ gp_train.out <- gp_train(X = X_train, Y = Y_train,
 optimize=TRUE, mixed_data = TRUE,
 cat_columns = cat_vars)
 gp_predict.out <- gp_predict(gp_train.out, X_test)
+}
 }

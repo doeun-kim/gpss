@@ -7,3 +7,5 @@
 ^\.github$
 ^README\.Rmd$
 ^vignettes/articles$
+^gpss.*\.tar\.gz$
+^cran-comments\.md$

@@ -36,6 +36,7 @@
 predict method for \code{gpss} objects
 }
 \examples{
+\donttest{
 library(gpss)
 data(lalonde)
 # categorical variables must be encoded as factors
@@ -44,8 +45,9 @@ dat <- transform(lalonde, race_ethnicity = factor(race_ethnicity))
 idx <- sample(seq_len(nrow(dat)), 500)
 dat_train <- dat[idx, ]
 dat_test <- dat[-idx, ]
-# sample of data for speed
+# Fit model
 mod <- gpss(re78 ~ nsw + age + educ + race_ethnicity, data = dat_train)
 p <- predict(mod, newdata = dat_test)
 p_confidence99 <- predict(mod, newdata = dat_test, interval = "confidence", level = 0.99)
+}
 }

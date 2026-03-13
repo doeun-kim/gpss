@@ -155,12 +155,12 @@ getb_maxvar <- function(x, kernel_type = "gaussian", period = NULL, maxsearch_b 
 
 #' kernel
 #'
-#' @param x1
-#' @param x2
-#' @param b
-#' @param kernel_type
-#' @param period
-#' @return kernel
+#' @param x1 first input matrix
+#' @param x2 second input matrix
+#' @param b bandwidth
+#' @param kernel_type kernel type string
+#' @param period period for periodic kernels
+#' @return kernel matrix
 #
 #' @importFrom Rcpp sourceCpp
 #' @keywords internal
@@ -198,11 +198,11 @@ kernel <- function(x1, x2, b, kernel_type = "gaussian", period = NULL) {
 
 #' kernel_symmetric
 #'
-#' @param x
-#' @param b
-#' @param kernel_type
-#' @param period
-#' @return kernel
+#' @param x input matrix
+#' @param b bandwidth
+#' @param kernel_type kernel type string
+#' @param period period for periodic kernels
+#' @return symmetric kernel matrix
 #
 #' @importFrom Rcpp sourceCpp
 #' @keywords internal
@@ -239,9 +239,9 @@ kernel_symmetric <- function(x, b, kernel_type = "gaussian", period = NULL) {
 
 #' estimate_period
 #'
-#' @param y
-#' @param min_obs
-#' @return null
+#' @param y numeric vector of observations
+#' @param min_obs minimum number of observations required
+#' @return estimated period (numeric)
 #
 #' @importFrom stats fft residuals lm var
 #' @keywords internal

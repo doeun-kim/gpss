@@ -119,7 +119,7 @@ gp_rdd <- function(X, Y, cut, alpha=0.05, b=NULL,
 #' @importFrom ggplot2 ggplot geom_point geom_line geom_ribbon theme_minimal aes
 #' @importFrom rlang .data
 #' @importFrom stats as.formula formula model.frame model.response
-#' @return \item{gg}{an RD ggplot}
+#' @return A \code{ggplot} object showing the RD plot.
 #' @export
 gp_rdd_plot <- function(gp_rdd_res,
                         l_col = "blue",

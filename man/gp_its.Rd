@@ -66,8 +66,28 @@ gp_its(
 \item{verbose}{logical; print progress messages}
 }
 \value{
-Object of class "gp_its"
+An object of class \code{"gp_its"}, a list containing:
+\item{y}{the outcome vector}
+\item{dates}{the date vector}
+\item{date_treat}{the treatment date}
+\item{y0_hat}{counterfactual predictions for post-treatment periods}
+\item{estimates}{data frame with columns \code{tau_t}, \code{tau_cum}, \code{tau_avg}}
+\item{se}{data frame of standard errors}
+\item{ci}{data frame of confidence interval bounds}
+\item{gp_model}{the fitted GP model from \code{\link{gp_train}}}
+\item{placebo_estimates}{placebo check results (if requested)}
 }
 \description{
 Gaussian Process Interrupted Time Series
+}
+\examples{
+\donttest{
+# Simulated interrupted time series
+set.seed(42)
+n <- 50
+dates <- seq(as.Date("2020-01-01"), by = "month", length.out = n)
+y <- rnorm(n) + c(rep(0, 30), rep(2, 20))
+res <- gp_its(y, dates, date_treat = as.Date("2022-07-01"))
+print(res)
+}
 }

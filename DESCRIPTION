@@ -1,28 +1,40 @@
 Package: gpss
-Title: Gaussian Processes in Social Science
-Version: 0.1.0
-Authors@R: 
+Title: Gaussian Processes for Social Science
+Version: 1.0.0
+Date: 2026-03-13
+Authors@R:
    c(person("Soonhong", "Cho", , "tnsehdtm@gmail.com", role = c("aut")),
     person("Doeun", "Kim", , "doeun2@ucla.edu", role = c("aut"),
            comment = c(ORCID = "0000-0003-4789-6599")),
     person("Chad", "Hazlett", , "chazlett@ucla.edu", role = c("aut", "cre")))
-Description: The Gaussian Process (GP) combines a highly flexible non-linear regression approach with rigorous handling of uncertainty. A key feature of this approach is that, while it can be used to produce a conditional expectation function representing the mode of a posterior conditional distribution, it does not ``choose a particular model fit'' and construct uncertainty estimates conditional on putting full faith in that model. This is valuable because the uncertainty estimates reflect the lesser knowledge we have at locations near, at, or beyond the edge of the observed data, where results from other approaches would become highly model-dependent. We first offer an accessible explanation of GPs, and provide an implementation more suitable to social science inference problems, which reduces the number of user-chosen hyperparameters from three to zero. We then illustrate the settings in which GPs can be most valuable: those where conventional approaches have poor properties due to model-dependency/extrapolation in data-sparse regions. Specifically, we demonstrate the usefulness of GPs in contexts where (i) treated and control models are needed by these groups have poor covariate overlap; (ii) regression discontinuity, which depends on model estimates taken at or just beyond the edge of their supporting data; and (iii) interrupted time-series designs, where models are fitted prior to an event by extrapolated after it. 
+Description: Provides Gaussian Process (GP) regression tools for social
+    science inference problems.  GPs combine flexible nonparametric
+    regression with principled uncertainty quantification: rather than
+    committing to a single model fit, the posterior reflects lesser
+    knowledge at the edge of or beyond the observed data, where other
+    approaches become highly model-dependent.  The package reduces
+    user-chosen hyperparameters from three to zero and supplies
+    convenience functions for regression discontinuity ('gp_rdd'),
+    interrupted time-series ('gp_its'), and general GP fitting
+    ('gpss', 'gp_train', 'gp_predict').  Methods are described in
+    Cho, Kim, and Hazlett (2026) <doi:10.1017/pan.2026.10032>.
 License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
-URL: http://doeunkim.org/gpss/
+RoxygenNote: 7.3.3
+URL: https://doeunkim.org/gpss/,
+    https://github.com/doeun-kim/gpss
 BugReports: https://github.com/doeun-kim/gpss/issues
 Imports:
     Rcpp (>= 1.0.14),
-    MASS,
     Matrix,
     ggplot2,
     rlang
 LinkingTo: Rcpp, RcppArmadillo
-Depends: 
+Depends:
     R (>= 3.5.0)
 LazyData: true
-Suggests: 
+Suggests:
+    MASS,
     posterior,
-    rmarkdown
+    testthat (>= 3.0.0)
