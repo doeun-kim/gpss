@@ -14,7 +14,7 @@ gp_rdd_plot(gp_rdd_res, l_col = "blue", r_col = "red")
 \item{r_col}{a character value indicating the color of the right side of the cutoff point (default = "red")}
 }
 \value{
-\item{gg}{an RD ggplot}
+A \code{ggplot} object showing the RD plot.
 }
 \description{
 to draw an RD plot using the results obtained from gp_rdd()

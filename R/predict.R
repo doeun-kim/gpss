@@ -8,8 +8,8 @@
 #' @param level a numerical value between 0 and 1
 #' @param prior_mean a numeric vector of prior mean values for Y at each test observation. Required when the model was trained with a \code{prior_mean}; see \code{\link{gp_predict}}. (default = NULL)
 #' @param ... additional arguments (not used)
-#' @inheritParams stats::predict
 #' @examples
+#' \donttest{
 #' library(gpss)
 #' data(lalonde)
 #' # categorical variables must be encoded as factors
@@ -18,10 +18,11 @@
 #' idx <- sample(seq_len(nrow(dat)), 500)
 #' dat_train <- dat[idx, ]
 #' dat_test <- dat[-idx, ]
-#' # sample of data for speed
+#' # Fit model
 #' mod <- gpss(re78 ~ nsw + age + educ + race_ethnicity, data = dat_train)
 #' p <- predict(mod, newdata = dat_test)
 #' p_confidence99 <- predict(mod, newdata = dat_test, interval = "confidence", level = 0.99)
+#' }
 #' @export
 predict.gpss <- function(object, newdata = NULL, type = "response",
                          format = "default", interval = "confidence",
@@ -89,7 +90,6 @@ predict.gpss <- function(object, newdata = NULL, type = "response",
     if (!requireNamespace("MASS", quietly = TRUE)) {
       stop("Please install the `MASS` package.", call. = FALSE)
     }
-
     rv <- MASS::mvrnorm(1e3, fit, gp_cov)
     out <- newdata
     out$rvar <- posterior::rvar(rv)

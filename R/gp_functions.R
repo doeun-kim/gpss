@@ -38,7 +38,7 @@ gp_optimize <- function(K, Y, optim.tol=0.1) {
 #' @param b bandwidth (default = NULL)
 #' @param s2 noise or a fraction of Y not explained by X (default = 0.3)
 #' @param optimize a logical value to indicate whether an automatic optimized value of S2 should be used. If FALSE, users must define s2. (default = FALSE)
-#' @param scale a logical value to indicate whether covariates should be scaled. (dafault = TRUE)
+#' @param scale a logical value to indicate whether covariates should be scaled. (default = TRUE)
 #' @param kernel_type a character value indicating the kernel type (default = "gaussian")
 #' @param period a numeric value for the period parameter, required for periodic kernels (default = NULL)
 #' @param time_col a character or numeric value indicating which column is the time variable. If specified, this column will be moved to the first position for correct period scaling in periodic kernels. (default = NULL)
@@ -73,6 +73,7 @@ gp_optimize <- function(K, Y, optim.tol=0.1) {
 #' \item{Xcolnames}{column names of X}
 #' \item{prior_mean}{the prior mean vector supplied at training (or NULL)}
 #' @examples
+#' \donttest{
 #' data(lalonde)
 #' cat_vars <- c("race_ethnicity", "married")
 #' all_vars <- c("age","educ","re74","re75","married", "race_ethnicity")
@@ -90,6 +91,7 @@ gp_optimize <- function(K, Y, optim.tol=0.1) {
 #' optimize=TRUE, mixed_data = TRUE,
 #' cat_columns = cat_vars)
 #' gp_predict.out <- gp_predict(gp_train.out, X_test)
+#' }
 #' @importFrom stats sd
 #' @importFrom Rcpp sourceCpp
 #'
@@ -340,6 +342,7 @@ gp_train <- function(X, Y, b = NULL, s2 = 0.3, optimize = FALSE,
 #' @param Xtest a data frame or a matrix of testing data set
 #' @param prior_mean a numeric vector of prior mean values for Y at each test point. Required when the model was trained with a \code{prior_mean}; added to \code{Ys_mean_orig} to recover predictions on the original Y scale. Must be the same length as \code{nrow(Xtest)}. (default = NULL)
 #' @examples
+#' \donttest{
 #' data(lalonde)
 #' cat_vars <- c("race_ethnicity", "married")
 #' all_vars <- c("age","educ","re74","re75","married", "race_ethnicity")
@@ -357,6 +360,7 @@ gp_train <- function(X, Y, b = NULL, s2 = 0.3, optimize = FALSE,
 #' optimize=TRUE, mixed_data = TRUE,
 #' cat_columns = cat_vars)
 #' gp_predict.out <- gp_predict(gp_train.out, X_test)
+#' }
 #' @importFrom Rcpp sourceCpp
 #' @return \item{Xtest_scaled}{testing data in a scaled form}
 #' \item{Xtest}{the original testing data set}
