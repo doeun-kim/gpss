@@ -31,7 +31,7 @@ Provides Gaussian Process (GP) regression tools for social science inference pro
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>gpss: Gaussian Processes for Social Science</h1>
-      <small class="dont-index">Source: <a href="https://github.com/doeun-kim/gpss/blob/HEAD/R/gpss-package.R" class="external-link"><code>R/gpss-package.R</code></a>, <a href="https://github.com/doeun-kim/gpss/blob/HEAD/R/gpss.R" class="external-link"><code>R/gpss.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/doeun-kim/gpss/blob/master/R/gpss-package.R" class="external-link"><code>R/gpss-package.R</code></a>, <a href="https://github.com/doeun-kim/gpss/blob/master/R/gpss.R" class="external-link"><code>R/gpss.R</code></a></small>
       <div class="d-none name"><code>gpss.Rd</code></div>
     </div>
 
@@ -184,7 +184,7 @@ Provides Gaussian Process (GP) regression tools for social science inference pro
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="co"># -- Basic fitting and prediction -----------------------------</span></span></span>
-<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://doeunkim.org/gpss/" class="external-link">gpss</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://doeunkim.org/gpss/">gpss</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">lalonde</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/transform.html" class="external-link">transform</a></span><span class="op">(</span><span class="va">lalonde</span>, race_ethnicity <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">race_ethnicity</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
@@ -198,7 +198,7 @@ Provides Gaussian Process (GP) regression tools for social science inference pro
 <span class="r-out co"><span class="r-pr">#&gt;</span> [3,] 21435.1890  19262.500 23607.88</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [4,] 17832.7472  15209.686 20455.81</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [5,] 13077.4249   8776.605 17378.24</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [6,]   360.2886 -11517.823 12238.40</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6,]   360.2888 -11517.823 12238.40</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># -- G-computation for the ATT (LaLonde data) ----------------</span></span></span>
 <span class="r-in"><span><span class="co"># The LaLonde dataset pairs 185 treated units from the NSW</span></span></span>
@@ -271,7 +271,7 @@ Provides Gaussian Process (GP) regression tools for social science inference pro
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

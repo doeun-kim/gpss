@@ -64,7 +64,7 @@
 </h2>
 <p>You can install the latest version by running:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">'doeun-kim/gpss'</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">'doeun-kim/gpss'</span><span class="op">)</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="troubleshooting-installation">Troubleshooting installation<a class="anchor" aria-label="anchor" href="#troubleshooting-installation"></a>
 </h3>
@@ -74,7 +74,7 @@
 </h4>
 <p>If you are on Windows, you will need to install <a href="https://cran.r-project.org/bin/windows/Rtools/" class="external-link">RTools</a> if you haven’t already. If you still are having difficulty with installing and it says that the compilation failed, try installing it without support for multiple architectures:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">'doeun-kim/gpss'</span>, args<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'--no-multiarch'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">'doeun-kim/gpss'</span>, args<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'--no-multiarch'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="mac-osx">Mac OSX<a class="anchor" aria-label="anchor" href="#mac-osx"></a>
@@ -97,7 +97,7 @@
 <h3 id="formula-interface">Formula interface<a class="anchor" aria-label="anchor" href="#formula-interface"></a>
 </h3>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://doeunkim.org/gpss/" class="external-link">gpss</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://doeunkim.org/gpss/">gpss</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">lalonde</span><span class="op">)</span></span>
 <span><span class="co"># categorical variables must be encoded as factors</span></span>
 <span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/transform.html" class="external-link">transform</a></span><span class="op">(</span><span class="va">lalonde</span>, race_ethnicity <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">race_ethnicity</span><span class="op">)</span><span class="op">)</span></span>
@@ -129,7 +129,7 @@
 <h3 id="matrix-interface">Matrix interface<a class="anchor" aria-label="anchor" href="#matrix-interface"></a>
 </h3>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://doeunkim.org/gpss/" class="external-link">gpss</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://doeunkim.org/gpss/">gpss</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">lalonde</span><span class="op">)</span></span>
 <span><span class="va">cat_vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"race_ethnicity"</span>, <span class="st">"married"</span><span class="op">)</span></span>
 <span><span class="va">all_vars</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"age"</span>,<span class="st">"educ"</span>,<span class="st">"re74"</span>,<span class="st">"re75"</span>,<span class="st">"married"</span>, <span class="st">"race_ethnicity"</span><span class="op">)</span></span>
@@ -209,7 +209,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>
