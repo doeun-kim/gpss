@@ -78,7 +78,7 @@ formula_to_design <- function(formula, data) {
 #'
 #' n1     <- sum(D)
 #' V0     <- gp_pred$f_cov_orig
-#' se_att <- sqrt(var(tau_i) / n1 + sum(V0) / n1^2)
+#' se_att <- sqrt(var(Y1) / n1 + sum(V0) / n1^2)
 #'
 #' cat(sprintf("GP ATT:  $%.0f (SE = $%.0f)\n", att, se_att))
 #' cat(sprintf("95%% CI: [$%.0f, $%.0f]\n",
