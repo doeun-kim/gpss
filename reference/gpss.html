@@ -235,11 +235,14 @@ Provides Gaussian Process (GP) regression tools for social science inference pro
 <span class="r-in"><span><span class="va">att</span>    <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">tau_i</span><span class="op">)</span>                   <span class="co"># ATT point estimate</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># -- Neyman-style SE for the ATT --</span></span></span>
+<span class="r-in"><span><span class="co"># The estimator is a difference of two means:</span></span></span>
+<span class="r-in"><span><span class="co"># ATT = mean(Y_obs - Y0_hat).</span></span></span>
+<span class="r-in"><span><span class="co"># So a Neyman-style SE:</span></span></span>
+<span class="r-in"><span><span class="co"># Var(mean(Y_obs)) + Var(mean(Y0_hat)).</span></span></span>
+<span class="r-in"><span><span class="co">#</span></span></span>
 <span class="r-in"><span><span class="co"># Two sources of uncertainty:</span></span></span>
 <span class="r-in"><span><span class="co">#</span></span></span>
-<span class="r-in"><span><span class="co"># 1. Sampling variance of unit-level effects: var(tau_i) / n1</span></span></span>
-<span class="r-in"><span><span class="co">#    This captures heterogeneity in treatment effects across</span></span></span>
-<span class="r-in"><span><span class="co">#    units, including variation in observed Y(1).</span></span></span>
+<span class="r-in"><span><span class="co"># 1. Sampling variance of observed outcomes: var(Y1) / n1</span></span></span>
 <span class="r-in"><span><span class="co">#</span></span></span>
 <span class="r-in"><span><span class="co"># 2. Posterior uncertainty in the counterfactuals: because Y(0)</span></span></span>
 <span class="r-in"><span><span class="co">#    predictions are correlated across units through the GP</span></span></span>
