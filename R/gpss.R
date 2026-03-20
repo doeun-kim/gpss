@@ -63,11 +63,14 @@ formula_to_design <- function(formula, data) {
 #' att    <- mean(tau_i)                   # ATT point estimate
 #'
 #' # -- Neyman-style SE for the ATT --
+#' # The estimator is a difference of two means:
+#' # ATT = mean(Y_obs - Y0_hat).
+#' # So a Neyman-style SE:
+#' # Var(mean(Y_obs)) + Var(mean(Y0_hat)).
+#' #
 #' # Two sources of uncertainty:
 #' #
-#' # 1. Sampling variance of unit-level effects: var(tau_i) / n1
-#' #    This captures heterogeneity in treatment effects across
-#' #    units, including variation in observed Y(1).
+#' # 1. Sampling variance of observed outcomes: var(Y1) / n1
 #' #
 #' # 2. Posterior uncertainty in the counterfactuals: because Y(0)
 #' #    predictions are correlated across units through the GP
