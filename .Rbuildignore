@@ -9,3 +9,4 @@
 ^vignettes/articles$
 ^gpss.*\.tar\.gz$
 ^cran-comments\.md$
+^notes$

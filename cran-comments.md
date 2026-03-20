@@ -2,7 +2,10 @@
 
 0 errors | 0 warnings | 1 note
 
-* This is a resubmission. Changes from v1.0.0:
+* This is a resubmission. Changes from v1.0.1:
+  - Added `notes/` to .Rbuildignore to remove non-standard top-level
+    directory from the built package
+* Changes from v1.0.0 (carried forward):
   - Added src/Makevars to link LAPACK/BLAS on Unix (fixes installation
     failure on Debian reported in initial submission)
   - Quoted author names in DESCRIPTION to address spelling NOTE
