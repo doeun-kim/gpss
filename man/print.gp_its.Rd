@@ -11,6 +11,9 @@
 
 \item{...}{additional arguments (not used)}
 }
+\value{
+The input object \code{x}, returned invisibly.
+}
 \description{
 Print method for gp_its objects
 }

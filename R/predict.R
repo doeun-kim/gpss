@@ -8,6 +8,13 @@
 #' @param level a numerical value between 0 and 1
 #' @param prior_mean a numeric vector of prior mean values for Y at each test observation. Required when the model was trained with a \code{prior_mean}; see \code{\link{gp_predict}}. (default = NULL)
 #' @param ... additional arguments (not used)
+#' @return If \code{format = "default"}, a numeric matrix with columns
+#'   \code{fit}, \code{lwr}, and \code{upr} giving the posterior mean and
+#'   the lower and upper bounds of the requested interval for each row of
+#'   \code{newdata}.
+#'   If \code{format = "rvar"}, a copy of \code{newdata} with an additional
+#'   column \code{rvar} containing a posterior random variable
+#'   (class \code{rvar} from the \pkg{posterior} package).
 #' @examples
 #' \donttest{
 #' library(gpss)

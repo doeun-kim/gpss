@@ -32,6 +32,15 @@
 
 \item{...}{additional arguments (not used)}
 }
+\value{
+If \code{format = "default"}, a numeric matrix with columns
+\code{fit}, \code{lwr}, and \code{upr} giving the posterior mean and
+the lower and upper bounds of the requested interval for each row of
+\code{newdata}.
+If \code{format = "rvar"}, a copy of \code{newdata} with an additional
+column \code{rvar} containing a posterior random variable
+(class \code{rvar} from the \pkg{posterior} package).
+}
 \description{
 predict method for \code{gpss} objects
 }

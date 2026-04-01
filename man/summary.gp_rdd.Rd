@@ -11,6 +11,9 @@
 
 \item{...}{additional arguments (not used)}
 }
+\value{
+The input object \code{object}, returned invisibly.
+}
 \description{
 Summary method for gp_rdd objects
 }

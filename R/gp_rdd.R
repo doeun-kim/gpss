@@ -174,6 +174,7 @@ gp_rdd_plot <- function(gp_rdd_res,
 #' Print method for gp_rdd objects
 #' @param x a gp_rdd object
 #' @param ... additional arguments (not used)
+#' @return The input object \code{x}, returned invisibly.
 #' @keywords internal
 #' @export
 print.gp_rdd <- function(x, ...) {
@@ -192,6 +193,7 @@ print.gp_rdd <- function(x, ...) {
 #' Summary method for gp_rdd objects
 #' @param object a gp_rdd object
 #' @param ... additional arguments (not used)
+#' @return The input object \code{object}, returned invisibly.
 #' @keywords internal
 #' @export
 summary.gp_rdd <- function(object, ...) {
