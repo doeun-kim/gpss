@@ -55,6 +55,14 @@ predict(
 
   additional arguments (not used)
 
+## Value
+
+If `format = "default"`, a numeric matrix with columns `fit`, `lwr`, and
+`upr` giving the posterior mean and the lower and upper bounds of the
+requested interval for each row of `newdata`. If `format = "rvar"`, a
+copy of `newdata` with an additional column `rvar` containing a
+posterior random variable (class `rvar` from the posterior package).
+
 ## Examples
 
 ``` r

@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">gpss</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -86,6 +86,16 @@
 <dd><p>additional arguments (not used)</p></dd>
 
 </dl></div>
+    <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    <p>If <code>format = "default"</code>, a numeric matrix with columns
+<code>fit</code>, <code>lwr</code>, and <code>upr</code> giving the posterior mean and
+the lower and upper bounds of the requested interval for each row of
+<code>newdata</code>.
+If <code>format = "rvar"</code>, a copy of <code>newdata</code> with an additional
+column <code>rvar</code> containing a posterior random variable
+(class <code>rvar</code> from the <span class="pkg">posterior</span> package).</p>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>

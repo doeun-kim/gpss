@@ -1,14 +1,14 @@
 # gpss: Gaussian Processes for Social Science
 
-Provides Gaussian Process (GP) regression tools for social science
+Provides Gaussian process (GP) regression tools for social science
 inference problems. GPs combine flexible nonparametric regression with
 principled uncertainty quantification: rather than committing to a
 single model fit, the posterior reflects lesser knowledge at the edge of
 or beyond the observed data, where other approaches become highly
 model-dependent. The package reduces user-chosen hyperparameters from
 three to zero and supplies convenience functions for regression
-discontinuity ('gp_rdd'), interrupted time-series ('gp_its'), and
-general GP fitting ('gpss', 'gp_train', 'gp_predict'). Methods are
+discontinuity (gp_rdd()), interrupted time-series (gp_its()), and
+general GP fitting (gpss(), gp_train(), gp_predict()). Methods are
 described in Cho, Kim, and Hazlett (2026)
 [doi:10.1017/pan.2026.10032](https://doi.org/10.1017/pan.2026.10032) .
 
