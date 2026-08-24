@@ -27,6 +27,7 @@ extrapolated after it.
 You can install the latest version by running:
 
 ``` r
+
 devtools::install_github('doeun-kim/gpss')
 ```
 
@@ -44,6 +45,7 @@ that the compilation failed, try installing it without support for
 multiple architectures:
 
 ``` r
+
 devtools::install_github('doeun-kim/gpss', args=c('--no-multiarch'))
 ```
 
@@ -81,6 +83,7 @@ Also see section 2.16
 ### Formula interface
 
 ``` r
+
 library(gpss)
 data(lalonde)
 # categorical variables must be encoded as factors
@@ -113,6 +116,7 @@ head(p)
 ### Matrix interface
 
 ``` r
+
 library(gpss)
 data(lalonde)
 cat_vars <- c("race_ethnicity", "married")
