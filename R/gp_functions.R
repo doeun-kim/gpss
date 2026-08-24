@@ -364,6 +364,8 @@ gp_train <- function(X, Y, b = NULL, s2 = 0.3, optimize = FALSE,
 #' @importFrom Rcpp sourceCpp
 #' @return \item{Xtest_scaled}{testing data in a scaled form}
 #' \item{Xtest}{the original testing data set}
+#' \item{Ks}{cross-kernel between test and training inputs (test rows)}
+#' \item{Kss}{kernel among test inputs}
 #' \item{Ys_mean_scaled}{the predicted values of Y in a scaled form}
 #' \item{Ys_mean_orig}{the predicted values of Y in the original scale}
 #' \item{Ys_cov_scaled}{covariance of predicted Y in a scaled form}
