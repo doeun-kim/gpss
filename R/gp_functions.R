@@ -474,7 +474,7 @@ gp_predict <- function(gp, Xtest, prior_mean = NULL) {
   results <- list(
     Xtest_scaled = Xtest,
     Xtest = Xtest_init,
-    #Ks = Ks, Kss = Kss,
+    Ks = Ks, Kss = Kss,
     Ys_mean_scaled = Ys_mean_scaled,
     Ys_mean_orig = Ys_mean_orig,
     Ys_cov_scaled = Ys_cov_scaled,
