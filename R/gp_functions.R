@@ -13,7 +13,7 @@
 #' \item{nlml}{the likelihood value at the optimal point}
 #' @keywords internal
 #' @noRd
-gp_optimize <- function(K, Y, optim.tol=0.1) {
+gp_optimize <- function(K, Y, optim.tol = 0.1, s2_interval = c(0.05, 1)) {
 
   # Define the objective function
   nlml <- function(s2, K, Y) {
@@ -22,7 +22,7 @@ gp_optimize <- function(K, Y, optim.tol=0.1) {
 
   # Find the optimal s2 (by MLE)
   # Since we always scale y, it is between 0 and 1; is 0.05 good for lower bound?
-  opt <- optimize(nlml, interval=c(0.05, 1), K=K, Y=Y, maximum=FALSE, tol=optim.tol)
+  opt <- optimize(nlml, interval = s2_interval, K = K, Y = Y, maximum = FALSE, tol = optim.tol)
   results <- list(s2opt = opt$minimum,
                   nlml = opt$objective)
   return(results)
@@ -46,6 +46,8 @@ gp_optimize <- function(K, Y, optim.tol=0.1) {
 #' @param cat_columns a character or a numerical vector indicating categorical variables. Must be character (not numeric) when time_col is specified. (default = NULL)
 #' @param Xtest a data frame or a matrix of testing covariates. This is necessary when a non-overlapping categorical value exists between training and testing data sets. (default = NULL)
 #' @param prior_mean a numeric vector of prior mean values for Y at each training observation. If provided, the GP is fitted to the residuals (Y - prior_mean), and the prior mean is added back to recover predictions on the original Y scale. Must be the same length as Y. (default = NULL)
+#' @param optim.tol tolerance passed to \code{optimize()} when \code{optimize = TRUE}; the search stops once the s2 minimizer is bracketed to within this width (default = 0.1; use e.g. 1e-6 for a precise MLE)
+#' @param s2_interval search interval for s2 (on the standardized-Y scale) when \code{optimize = TRUE} (default = c(0.05, 1))
 #'
 #' @return \item{post_mean_scaled}{posterior distribution of Y in a scaled form}
 #' \item{post_mean_orig}{posterior distribution of Y in an original scale}
@@ -100,7 +102,8 @@ gp_train <- function(X, Y, b = NULL, s2 = 0.3, optimize = FALSE,
                      scale = TRUE, kernel_type = "gaussian", period = NULL,
                      time_col = NULL,
                      mixed_data = FALSE, cat_columns = NULL, Xtest = NULL,
-                     prior_mean = NULL) {
+                     prior_mean = NULL,
+                     optim.tol = 0.1, s2_interval = c(0.05, 1)) {
 
   # Validate kernel_type matches available options
   kernel_type <- match.arg(kernel_type,
@@ -277,7 +280,7 @@ gp_train <- function(X, Y, b = NULL, s2 = 0.3, optimize = FALSE,
 
   # Optimize s2, given K (with optimized b)
   if (isTRUE(optimize)) {
-    opt <- gp_optimize(K = K, Y = Y)
+    opt <- gp_optimize(K = K, Y = Y, optim.tol = optim.tol, s2_interval = s2_interval)
     s2 <- opt$s2opt
   } #otherwise, user-specified s2 is given (or default s2)
 
